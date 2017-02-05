@@ -1,9 +1,11 @@
-package com.automile.model.response;
+package com.automile.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,5 +22,7 @@ public class AuthResponse {
 
     @JsonProperty("expires_in")
     int expiresIn;
+
+    LocalDateTime expirationDate;
 
 }

@@ -1,6 +1,6 @@
 package com.automile;
 
-import com.automile.model.response.AuthResponse;
+import com.automile.model.AuthResponse;
 import com.google.common.io.Resources;
 import com.google.common.net.HttpHeaders;
 import org.apache.http.HttpEntity;
@@ -20,7 +20,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.apache.http.HttpVersion.HTTP_1_1;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -63,7 +65,7 @@ public class AutomileClientTests {
     public void testAuthorizeOk() throws IOException {
         mockContent("authorize/Ok.json");
         ac.authorize();
-        AuthResponse authResponse = ac.getAuthResponse();
+        AuthResponse authResponse = ac.getAutomileService().getAuthResponse();
         assertNotNull(authResponse);
         assertTrue(authResponse.getAccessToken().startsWith("EVpKLYJ4-d4YAGwHIONX"));
         assertEquals("bearer", authResponse.getTokenType());

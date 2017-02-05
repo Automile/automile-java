@@ -1,6 +1,8 @@
 package com.automile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.apache.http.client.config.RequestConfig;
@@ -14,8 +16,14 @@ import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
 public class AutomileConfig {
 
     static final String BASE_URL = "https://api.automile.se";
-    static final String VERSION = "v1";
+    static final String BASE_URL_V1 = BASE_URL + "/v1";
     static final String AUTH_URL = BASE_URL + "/OAuth2/Token";
+    static final String CREATE_URL = BASE_URL_V1 + "/%s/%s";
+    static final String LIST_URL = BASE_URL_V1 + "/%s/%s";
+    static final String EDIT_URL = BASE_URL_V1 + "/%s/%s/%s";
+    static final String GET_BY_ID_URL = BASE_URL_V1 + "/%s/%s/%s";
+    static final String DELETE_URL = BASE_URL_V1 + "/%s/%s/%s";
+
     private static final int TIMEOUT = 30;
 
     private static final RequestConfig config = RequestConfig.custom()
@@ -28,8 +36,13 @@ public class AutomileConfig {
     private static CloseableHttpClient HTTP_CLIENT = HttpClients.custom().setDefaultRequestConfig(config).build();
 
     static {
-        MAPPER.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-        MAPPER.configure(INDENT_OUTPUT, true);
+        MAPPER
+                .configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(INDENT_OUTPUT, true)
+                //converts someFieldName to SomeFieldName
+                .setPropertyNamingStrategy(PropertyNamingStrategy.UpperCamelCaseStrategy.UPPER_CAMEL_CASE)
+                .registerModule(new JavaTimeModule());
+
     }
 
     public static ObjectMapper getMapper() {
