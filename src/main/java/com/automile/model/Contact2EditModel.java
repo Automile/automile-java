@@ -1,7 +1,9 @@
 package com.automile.model;
 
+import com.automile.model.enums.MapType;
+import com.automile.model.enums.TripType;
+import com.automile.model.enums.UnitType;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
@@ -17,57 +19,11 @@ public class Contact2EditModel {
     String cultureName;
     String countryCodeIso1366;
     Integer defaultVehicleId;
-    UnitTypeEnum unitType;
+    UnitType unitType;
     Boolean subscribeToNewsLetter;
     String mobilePhoneNumber;
-    MapTypeEnum mapType;
+    MapType mapType;
     LocalDateTime checkOutDateTimeUtc;
-    CheckedInTripTypeEnum checkedInTripType;
+    TripType checkedInTripType;
     String currencyCode;
-
-    @AllArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    public enum UnitTypeEnum {
-        NUMBER_0(0),
-        NUMBER_1(1);
-
-        Integer value;
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-    }
-
-    @AllArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    public enum MapTypeEnum {
-        NUMBER_0(0),
-        NUMBER_1(1),
-        NUMBER_2(2);
-
-        Integer value;
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-    }
-
-    @AllArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    public enum CheckedInTripTypeEnum {
-        NUMBER_0(0),
-        NUMBER_1(1),
-        NUMBER_2(2),
-        NUMBER_3(3);
-
-        Integer value;
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-    }
-
 }

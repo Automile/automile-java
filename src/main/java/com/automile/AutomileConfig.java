@@ -1,7 +1,9 @@
 package com.automile;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -41,6 +43,8 @@ public class AutomileConfig {
                 .configure(INDENT_OUTPUT, true)
                 //converts someFieldName to SomeFieldName
                 .setPropertyNamingStrategy(PropertyNamingStrategy.UpperCamelCaseStrategy.UPPER_CAMEL_CASE)
+                .enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
+                .enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
                 .registerModule(new JavaTimeModule());
 
     }

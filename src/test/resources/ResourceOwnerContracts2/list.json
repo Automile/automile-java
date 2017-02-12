@@ -1,0 +1,41 @@
+[
+  {
+    "ContactId": 19109,
+    "FirstName": "qwe",
+    "LastName": "qwe",
+    "EmailAddress": "qwe@qwe.com",
+    "MobilePhoneNumber": null,
+    "ProfileImageUrl": "//content.automile.com/images/fallback-avatar.png",
+    "CheckedInDateTimeUtc": null,
+    "CheckedIntoVehicleId": null,
+    "IsManager": false,
+    "CompanyRoles": null,
+    "CurrencyCode": null
+  },
+  {
+    "ContactId": 19110,
+    "FirstName": "qwe2",
+    "LastName": "qwe2",
+    "EmailAddress": "qwe2@qwe.com",
+    "MobilePhoneNumber": null,
+    "ProfileImageUrl": "//content.automile.com/images/fallback-avatar.png",
+    "CheckedInDateTimeUtc": null,
+    "CheckedIntoVehicleId": null,
+    "IsManager": false,
+    "CompanyRoles": null,
+    "CurrencyCode": null
+  },
+  {
+    "ContactId": 19111,
+    "FirstName": "qwe2",
+    "LastName": "qwe2",
+    "EmailAddress": "qwe2@qwe.com",
+    "MobilePhoneNumber": null,
+    "ProfileImageUrl": "//content.automile.com/images/fallback-avatar.png",
+    "CheckedInDateTimeUtc": null,
+    "CheckedIntoVehicleId": null,
+    "IsManager": false,
+    "CompanyRoles": null,
+    "CurrencyCode": null
+  }
+]

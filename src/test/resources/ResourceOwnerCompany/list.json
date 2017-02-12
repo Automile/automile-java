@@ -1,0 +1,37 @@
+[
+  {
+    "CompanyId": 4294,
+    "RegisteredCompanyName": "xxx",
+    "RegistrationNumber": "yyyy"
+  },
+  {
+    "CompanyId": 4295,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  },
+  {
+    "CompanyId": 4296,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  },
+  {
+    "CompanyId": 4298,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  },
+  {
+    "CompanyId": 4324,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  },
+  {
+    "CompanyId": 4392,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  },
+  {
+    "CompanyId": 4393,
+    "RegisteredCompanyName": "yyy",
+    "RegistrationNumber": "xxx"
+  }
+]

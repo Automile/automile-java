@@ -1,0 +1,111 @@
+package com.automile.model;
+
+import com.automile.model.enums.FuelType;
+import com.automile.model.enums.OwnerType;
+import com.automile.model.enums.TransmissionType;
+import com.automile.model.enums.TripType;
+import com.google.common.collect.Lists;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Vehicle2DetailModel {
+    String vehicleIdentificationNumber;
+    String numberPlate;
+    String make;
+    String model;
+    Integer modelYear;
+    String bodyStyle;
+    Integer ownerContactId;
+    Integer ownerCompanyId;
+    String ownedByName;
+    Integer numberOfTrips;
+    Double distanceTravelledThisYear;
+    Double distanceTravelledLastYear;
+    Double lastKnownLatitude;
+    Double lastKnownLongitude;
+    LocalDateTime lastKnownGeoTimeStamp;
+    String lastKnownFormattedAddress;
+    String lastKnownCustomAddress;
+    Double lastKnownSpeed;
+    Double lastKnownTemperature;
+    LocalDateTime lastKnownTemperatureTimeStamp;
+    Double lastTripEndLatitude;
+    Double lastTripEndLongitude;
+    LocalDateTime lastTripStartGeoTimeStamp;
+    LocalDateTime lastTripEndGeoTimeStamp;
+    Integer parkedForNumberOfSeconds;
+    Integer ongoingTripId;
+    Integer lastTripId;
+    String makeImageUrl;
+    Double currentOdometerInKilometers;
+    String userVehicleIdentificationNumber;
+    FuelType fuelType;
+    TripType defaultTripType;
+    Boolean allowAutomaticUpdates;
+    LocalDateTime aquiredDate;
+    Double yearlyTax;
+    LocalDateTime lastSyncUtcWithVehicleExternalInformation;
+    Integer numberOfOwners;
+    String status1;
+    String registeredInISO3166CountryCode;
+    Boolean allowAutomaticVehicleExternalInformationUpdate;
+    Double cO2Urban;
+    Double cO2UrbanExtra;
+    Double cO2Combined;
+    String frontTyre;
+    String rearTyre;
+    String frontWheelRim;
+    String rearWheelRim;
+    Boolean trailerHitch;
+    Double trailerHitchMaxLoadKgWithoutBreaks;
+    Double trailerHitchMaxLoadKgWithDefaultDriversLicence;
+    Double trailerHitchMaxLoadKgWithAlternativeDriversLicence;
+    LocalDateTime inspectionPeriodStart;
+    LocalDateTime inspectionPeriodEnd;
+    String owner;
+    OwnerType ownerType;
+    String leaseCompany;
+    String insuranceCompany;
+    Integer engineSizekW;
+    Integer displacementCm3;
+    Double vehicleMatureTax;
+    Double vehicleTax;
+    byte[] maxNumberOfPassengers;
+    Double curbWeightKg;
+    Double grossWeightKg;
+    Double taxWeightKg;
+    Double maxGrossWeightWithTrailerKg;
+    Boolean isImported;
+    LocalDateTime firstDateRegisteredInCurrentCountry;
+    LocalDateTime vehicleManufacturedDate;
+    String paintColor;
+    Boolean allowTripDrivingEventRecording;
+    LocalDateTime insuranceDate;
+    Double trailerHitchMaxWeightKg;
+    LocalDateTime lastInspectionDate;
+    Integer checkedInContactId;
+    Integer lastTripIdCheckedInContact;
+    Double fuelConsumptionCombinedLiters;
+    TransmissionType transmissionType;
+    Double priceExcludingEquipmentLocalCurrency;
+    Double averageTripDistanceKm;
+    Double averigeTripIdleTimeSeconds;
+    Double averageFuelConsumptionLiter;
+    Boolean isEditable;
+    Integer transferIntervalInSeconds;
+    Boolean sampleHarshEvents;
+    List<String> features = Lists.newArrayList();
+    Boolean allowSpeedRecording;
+    String nickname;
+    Integer categoryColor;
+    String tags;
+
+
+}
+

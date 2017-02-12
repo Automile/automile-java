@@ -15,9 +15,25 @@ import com.automile.model.Contact2CreateModel;
 import com.automile.model.Contact2DetailModel;
 import com.automile.model.Contact2EditModel;
 import com.automile.model.Contact2Model;
+import com.automile.model.ExpenseReportCreateModel;
+import com.automile.model.ExpenseReportEditModel;
+import com.automile.model.ExpenseReportModel;
+import com.automile.model.ExpenseReportRowContentCreateModel;
+import com.automile.model.ExpenseReportRowContentEditModel;
+import com.automile.model.ExpenseReportRowContentModel;
+import com.automile.model.ExpenseReportRowCreateModel;
+import com.automile.model.ExpenseReportRowEditModel;
+import com.automile.model.ExpenseReportRowModel;
+import com.automile.model.Vehicle2CreateModel;
+import com.automile.model.Vehicle2DetailModel;
+import com.automile.model.Vehicle2EditModel;
+import com.automile.model.Vehicle2Model;
 import com.google.common.net.HttpHeaders;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
@@ -41,10 +57,12 @@ import static com.automile.AutomileConfig.getMapper;
 import static java.lang.String.format;
 
 @Slf4j
+@FieldDefaults(level = AccessLevel.PUBLIC)
 public class AutomileClient {
 
     @Getter
-    final AutomileService automileService = new AutomileService();
+    @Setter
+    AutomileService automileService = new AutomileService();
 
     String clientId;
     String clientSecret;
@@ -90,8 +108,8 @@ public class AutomileClient {
         }
     }
 
-    public CompanyModel createCompany(CompanyCreateModel model) {
-        return automileService.createCall(model, CompanyModel.class, format(CREATE_URL, "resourceowner", "companies"));
+    public CompanyDetailModel createCompany(CompanyCreateModel model) {
+        return automileService.createCall(model, CompanyDetailModel.class, format(CREATE_URL, "resourceowner", "companies"));
     }
 
     public List<CompanyModel> getCompanies() {
@@ -102,31 +120,31 @@ public class AutomileClient {
         return automileService.getByIdCall(CompanyDetailModel.class, format(GET_BY_ID_URL, "resourceowner", "companies", id));
     }
 
-    public CompanyModel editCompany(Integer id, CompanyEditModel model) {
-        return automileService.editCall(model, CompanyModel.class, format(EDIT_URL, "resourceowner", "companies", id));
+    public void editCompany(Integer id, CompanyEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "companies", id));
     }
 
     public void deleteCompany(Integer id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "companies", id));
     }
 
-    public CompanyContactDetailModel createCompanyContract(CompanyContactCreateModel model) {
+    public CompanyContactDetailModel createCompanyContact(CompanyContactCreateModel model) {
         return automileService.createCall(model, CompanyContactDetailModel.class, format(CREATE_URL, "resourceowner", "companycontact"));
     }
 
-    public List<CompanyContactDetailModel> getCompanyContracts() {
+    public List<CompanyContactDetailModel> getCompanyContacts() {
         return automileService.listCall(CompanyContactDetailModel.class, format(LIST_URL, "resourceowner", "companycontact"));
     }
 
-    public CompanyContactDetailModel getCompanyContract(Integer id) {
+    public CompanyContactDetailModel getCompanyContact(Integer id) {
         return automileService.getByIdCall(CompanyContactDetailModel.class, format(GET_BY_ID_URL, "resourceowner", "companycontact", id));
     }
 
-    public CompanyContactDetailModel editCompanyContract(Integer id, CompanyContactEditModel model) {
-        return automileService.editCall(model, CompanyContactDetailModel.class, format(EDIT_URL, "resourceowner", "companycontact", id));
+    public void editCompanyContact(Integer id, CompanyContactEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "companycontact", id));
     }
 
-    public void deleteCompanyContract(Integer id) {
+    public void deleteCompanyContact(Integer id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "companycontact", id));
     }
 
@@ -142,8 +160,8 @@ public class AutomileClient {
         return automileService.getByIdCall(CompanyVehicleModel.class, format(GET_BY_ID_URL, "resourceowner", "companyvehicle", id));
     }
 
-    public CompanyVehicleModel editCompanyVehicle(Integer id, CompanyVehicleEditModel model) {
-        return automileService.editCall(model, CompanyVehicleModel.class, format(EDIT_URL, "resourceowner", "companyvehicle", id));
+    public void editCompanyVehicle(Integer id, CompanyVehicleEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "companyvehicle", id));
     }
 
     public void deleteCompanyVehicle(Integer id) {
@@ -162,12 +180,92 @@ public class AutomileClient {
         return automileService.getByIdCall(Contact2DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts2", id));
     }
 
-    public Contact2Model editContact2(Integer id, Contact2EditModel model) {
-        return automileService.editCall(model, Contact2Model.class, format(EDIT_URL, "resourceowner", "contacts2", id));
+    public void editContact2(Integer id, Contact2EditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "contacts2", id));
     }
 
     public void deleteContact2(Integer id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "contacts2", id));
+    }
+
+
+    public Vehicle2Model createVehicle2(Vehicle2CreateModel model) {
+        return automileService.createCall(model, Vehicle2Model.class, format(CREATE_URL, "resourceowner", "vehicles2"));
+    }
+
+    public List<Vehicle2Model> getVehicles2() {
+        return automileService.listCall(Vehicle2Model.class, format(LIST_URL, "resourceowner", "vehicles2"));
+    }
+
+    public Vehicle2DetailModel getVehicle2(Integer id) {
+        return automileService.getByIdCall(Vehicle2DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "vehicles2", id));
+    }
+
+    public void editVehicle2(Integer id, Vehicle2EditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "vehicles2", id));
+    }
+
+    public void deleteVehicle2(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "vehicles2", id));
+    }
+
+
+    public ExpenseReportModel createExpenseReport(ExpenseReportCreateModel model) {
+        return automileService.createCall(model, ExpenseReportModel.class, format(CREATE_URL, "resourceowner", "expensereport"));
+    }
+
+    public List<ExpenseReportModel> getExpenseReports() {
+        return automileService.listCall(ExpenseReportModel.class, format(LIST_URL, "resourceowner", "expensereport"));
+    }
+
+    public ExpenseReportModel getExpenseReport(Integer id) {
+        return automileService.getByIdCall(ExpenseReportModel.class, format(GET_BY_ID_URL, "resourceowner", "expensereport", id));
+    }
+
+    public void editExpenseReport(Integer id, ExpenseReportEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "expensereport", id));
+    }
+
+    public void deleteExpenseReport(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "expensereport", id));
+    }
+
+
+    public ExpenseReportRowModel createExpenseReportRow(ExpenseReportRowCreateModel model) {
+        return automileService.createCall(model, ExpenseReportRowModel.class, format(CREATE_URL, "resourceowner", "expensereportrow"));
+    }
+
+    public ExpenseReportRowModel getExpenseReportRow(Integer id) {
+        return automileService.getByIdCall(ExpenseReportRowModel.class, format(GET_BY_ID_URL, "resourceowner", "expensereportrow", id));
+    }
+
+    public void editExpenseReportRow(Integer id, ExpenseReportRowEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "expensereportrow", id));
+    }
+
+    public void deleteExpenseReportRow(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "expensereportrow", id));
+    }
+
+
+    public ExpenseReportRowContentModel createExpenseReportRowContent(ExpenseReportRowContentCreateModel model) {
+        return automileService.createCall(model, ExpenseReportRowContentModel.class, format(CREATE_URL, "resourceowner", "expensereportrowcontent"));
+    }
+
+    public List<ExpenseReportRowContentModel> getExpenseReportRowContents() {
+        return automileService.listCall(ExpenseReportRowContentModel.class, format(LIST_URL, "resourceowner", "expensereportrowcontent"));
+    }
+
+    public ExpenseReportRowContentModel getExpenseReporRowContentt(Integer id) {
+        return automileService.getByIdCall(ExpenseReportRowContentModel.class, format(GET_BY_ID_URL, "resourceowner", "expensereportrowcontent", id));
+    }
+
+    public void editExpenseReportRowContent(Integer id, ExpenseReportRowContentEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "expensereportrowcontent", id));
+    }
+
+    public void deleteExpenseReportRowContent(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "expensereportrowcontent", id));
     }
 
 }

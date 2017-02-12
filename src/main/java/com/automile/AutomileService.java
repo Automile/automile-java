@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -35,7 +37,7 @@ public class AutomileService {
 
     @Getter
     @Setter
-    AuthResponse authResponse;
+    private AuthResponse authResponse;
 
     public void deleteCall(String url) {
         validateToken();
@@ -87,11 +89,11 @@ public class AutomileService {
         return executeAndConvert(clazz, request);
     }
 
-    public <T> T editCall(Object model, Class<T> clazz, String url) {
+    public void editCall(Object model, String url) {
         validateToken();
         HttpUriRequest request = RequestBuilder.put(url)
                 .addHeader(getOauthHeader()).setEntity(getEntity(model)).build();
-        return executeAndConvert(clazz, request);
+        executeAndConvert(null, request);
     }
 
     public String getResponseString(CloseableHttpResponse response) throws IOException {
@@ -114,7 +116,16 @@ public class AutomileService {
         CloseableHttpResponse response = null;
         try {
             response = getHttpClient().execute(request);
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == HttpStatus.SC_CREATED) {
+                log.info("Response status code {}", statusCode);
+                Header location = response.getFirstHeader(org.apache.http.HttpHeaders.LOCATION);
+                return getByIdCall(clazz, location.getValue());
+            }
             String responseString = getResponseString(response);
+            if (StringUtils.isEmpty(responseString) || clazz == null) {
+                return null;
+            }
             return getMapper().readValue(responseString, clazz);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
@@ -136,11 +147,11 @@ public class AutomileService {
         }
     }
 
-    private void validateToken() {
-        if (authResponse == null) {
+    public void validateToken() {
+        if (getAuthResponse() == null) {
             throw new AutomileException("Please authorize before");
         }
-        if (authResponse.getExpirationDate().isBefore(LocalDateTime.now())) {
+        if (getAuthResponse().getExpirationDate().isBefore(LocalDateTime.now())) {
             //TODO: add config possibility optionally refresh token
             throw new AutomileException("Authorization expired");
         }
