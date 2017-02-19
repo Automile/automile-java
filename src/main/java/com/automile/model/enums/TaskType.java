@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum TaskType {
-    NUMBER_0(0),
-    NUMBER_1(1);
+    Message(0),
+    Task(1);
 
     private Integer value;
 

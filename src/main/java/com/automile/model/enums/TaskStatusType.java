@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum TaskStatusType {
-    NUMBER_0(0),
-    NUMBER_1(1);
+    Open(0),
+    Closed(1);
 
     private Integer value;
 
