@@ -24,10 +24,25 @@ import com.automile.model.ExpenseReportRowContentModel;
 import com.automile.model.ExpenseReportRowCreateModel;
 import com.automile.model.ExpenseReportRowEditModel;
 import com.automile.model.ExpenseReportRowModel;
+import com.automile.model.IMEIConfigCreateModel;
+import com.automile.model.IMEIConfigDetailModel;
+import com.automile.model.IMEIConfigEditModel;
+import com.automile.model.IMEIConfigModel;
+import com.automile.model.PlaceCreateModel;
+import com.automile.model.PlaceEditModel;
+import com.automile.model.PlaceModel;
+import com.automile.model.PublishSubscribeCreateModel;
+import com.automile.model.PublishSubscribeEditModel;
+import com.automile.model.PublishSubscribeModel;
+import com.automile.model.TaskCreateModel;
+import com.automile.model.TaskDetailModel;
+import com.automile.model.TaskEditModel;
+import com.automile.model.TaskModel;
 import com.automile.model.Vehicle2CreateModel;
 import com.automile.model.Vehicle2DetailModel;
 import com.automile.model.Vehicle2EditModel;
 import com.automile.model.Vehicle2Model;
+import com.google.common.collect.Lists;
 import com.google.common.net.HttpHeaders;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,6 +53,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
@@ -214,8 +230,12 @@ public class AutomileClient {
         return automileService.createCall(model, ExpenseReportModel.class, format(CREATE_URL, "resourceowner", "expensereport"));
     }
 
-    public List<ExpenseReportModel> getExpenseReports() {
-        return automileService.listCall(ExpenseReportModel.class, format(LIST_URL, "resourceowner", "expensereport"));
+    public List<ExpenseReportModel> getExpenseReports(Integer tripId, Integer vehicleId) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("tripId", tripId, params);
+        automileService.addParam("vehicleId", vehicleId, params);
+        return automileService.listCall(ExpenseReportModel.class, format(LIST_URL, "resourceowner", "expensereport"),
+                params.toArray(new NameValuePair[params.size()]));
     }
 
     public ExpenseReportModel getExpenseReport(Integer id) {
@@ -252,11 +272,14 @@ public class AutomileClient {
         return automileService.createCall(model, ExpenseReportRowContentModel.class, format(CREATE_URL, "resourceowner", "expensereportrowcontent"));
     }
 
-    public List<ExpenseReportRowContentModel> getExpenseReportRowContents() {
-        return automileService.listCall(ExpenseReportRowContentModel.class, format(LIST_URL, "resourceowner", "expensereportrowcontent"));
+    public List<ExpenseReportRowContentModel> getExpenseReportRowContents(Integer expenseReportRowId) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("expenseReportRowId", expenseReportRowId, params);
+        return automileService.listCall(ExpenseReportRowContentModel.class, format(LIST_URL, "resourceowner", "expensereportrowcontent"),
+                params.toArray(new NameValuePair[params.size()]));
     }
 
-    public ExpenseReportRowContentModel getExpenseReporRowContentt(Integer id) {
+    public ExpenseReportRowContentModel getExpenseReporRowContent(Integer id) {
         return automileService.getByIdCall(ExpenseReportRowContentModel.class, format(GET_BY_ID_URL, "resourceowner", "expensereportrowcontent", id));
     }
 
@@ -266,6 +289,88 @@ public class AutomileClient {
 
     public void deleteExpenseReportRowContent(Integer id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "expensereportrowcontent", id));
+    }
+
+    public IMEIConfigModel createIMEIConfig(IMEIConfigCreateModel model) {
+        return automileService.createCall(model, IMEIConfigModel.class, format(CREATE_URL, "resourceowner", "imeiconfigs"));
+    }
+
+    public List<IMEIConfigModel> getIMEIConfigs(boolean includeDeviceType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("includeDeviceType", includeDeviceType, params);
+        return automileService.listCall(IMEIConfigModel.class, format(LIST_URL, "resourceowner", "imeiconfigs"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    public IMEIConfigDetailModel getIMEIConfig(Integer id, boolean includeDeviceType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("includeDeviceType", includeDeviceType, params);
+        return automileService.getByIdCall(IMEIConfigDetailModel.class, format(GET_BY_ID_URL, "resourceowner", "imeiconfigs", id),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    public void editIMEIConfig(Integer id, IMEIConfigEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "imeiconfigs", id));
+    }
+
+    public void deleteIMEIConfig(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "imeiconfigs", id));
+    }
+
+    public PlaceModel createPlace(PlaceCreateModel model) {
+        return automileService.createCall(model, PlaceModel.class, format(CREATE_URL, "resourceowner", "place"));
+    }
+
+    public List<PlaceModel> getPlaces() {
+        return automileService.listCall(PlaceModel.class, format(LIST_URL, "resourceowner", "place"));
+    }
+
+    public PlaceModel getPlace(Integer id) {
+        return automileService.getByIdCall(PlaceModel.class, format(GET_BY_ID_URL, "resourceowner", "place", id));
+    }
+
+    public void editPlace(Integer id, PlaceEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "place", id));
+    }
+
+    public void deletePlace(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "place", id));
+    }
+
+    public PublishSubscribeModel createPublishSubscribe(PublishSubscribeCreateModel model) {
+        return automileService.createCall(model, PublishSubscribeModel.class, format(CREATE_URL, "resourceowner", "publishsubscribe"));
+    }
+
+    public List<PublishSubscribeModel> getPublishSubscribes() {
+        return automileService.listCall(PublishSubscribeModel.class, format(LIST_URL, "resourceowner", "publishsubscribe"));
+    }
+
+    public PublishSubscribeModel getPublishSubscribe(Integer id) {
+        return automileService.getByIdCall(PublishSubscribeModel.class, format(GET_BY_ID_URL, "resourceowner", "publishsubscribe", id));
+    }
+
+    public void editPublishSubscribe(Integer id, PublishSubscribeEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "publishsubscribe", id));
+    }
+
+    public void deletePublishSubscribe(Integer id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "publishsubscribe", id));
+    }
+
+    public TaskDetailModel createTask(TaskCreateModel model) {
+        return automileService.createCall(model, TaskDetailModel.class, format(CREATE_URL, "resourceowner", "task"));
+    }
+
+    public List<TaskModel> getTasks() {
+        return automileService.listCall(TaskModel.class, format(LIST_URL, "resourceowner", "task"));
+    }
+
+    public TaskDetailModel getTask(Integer id) {
+        return automileService.getByIdCall(TaskDetailModel.class, format(GET_BY_ID_URL, "resourceowner", "task", id));
+    }
+
+    public void editTask(Integer id, TaskEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "task", id));
     }
 
 }

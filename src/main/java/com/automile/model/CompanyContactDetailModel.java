@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,7 +15,5 @@ public class CompanyContactDetailModel {
     String companyName;
     Integer contactId;
     String contactName;
-    LocalDateTime lastModified;
-    LocalDateTime created;
     List<String> scopes = Lists.newArrayList();
 }

@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -20,6 +21,7 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -55,18 +57,18 @@ public class AutomileService {
         }
     }
 
-    public <T> T getByIdCall(Class<T> clazz, String url) {
+    public <T> T getByIdCall(Class<T> clazz, String url, NameValuePair... params) {
         validateToken();
         HttpUriRequest request = RequestBuilder.get(url)
-                .addHeader(getOauthHeader()).build();
+                .addHeader(getOauthHeader()).addParameters(params).build();
         return executeAndConvert(clazz, request);
     }
 
 
-    public <T> List<T> listCall(Class<T> clazz, String url) {
+    public <T> List<T> listCall(Class<T> clazz, String url, NameValuePair... params) {
         validateToken();
         HttpUriRequest request = RequestBuilder.get(url)
-                .addHeader(getOauthHeader()).build();
+                .addHeader(getOauthHeader()).addParameters(params).build();
         CloseableHttpResponse response = null;
         try {
             response = getHttpClient().execute(request);
@@ -154,6 +156,12 @@ public class AutomileService {
         if (getAuthResponse().getExpirationDate().isBefore(LocalDateTime.now())) {
             //TODO: add config possibility optionally refresh token
             throw new AutomileException("Authorization expired");
+        }
+    }
+
+    public void addParam(String key, Object value, List<NameValuePair> params) {
+        if (value != null) {
+            params.add(new BasicNameValuePair(key, value.toString()));
         }
     }
 

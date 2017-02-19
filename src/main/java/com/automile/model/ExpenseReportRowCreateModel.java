@@ -20,5 +20,7 @@ public class ExpenseReportRowCreateModel {
     CategoryType category;
     LocalDateTime expenseReportRowDateUtc;
     List<ExpenseReportRowContentCreateModel> expenseReportRowContent = Lists.newArrayList();
+    String customCategory;
+    Double categoryValue;
+    String merchant;
 }
-

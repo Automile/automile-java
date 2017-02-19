@@ -19,5 +19,8 @@ public class ExpenseReportRowEditModel {
     LocalDateTime expenseReportRowDateUtc;
     CategoryType category;
     List<ExpenseReportRowContentUpdateEditModel> expenseReportRowContent = Lists.newArrayList();
+    String customCategory;
+    Double categoryValue;
+    String merchant;
 }
 

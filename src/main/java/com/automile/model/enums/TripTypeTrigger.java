@@ -3,17 +3,13 @@ package com.automile.model.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum CategoryType {
-    Fuel(0),
-    SpareParts(1),
-    Parking(2),
-    Other(3),
-    Toll(4),
-    //TODO: nam
-    NUMBER_5(5);
+public enum TripTypeTrigger {
+    Start(0),
+    End(1),
+    DrivesBetween(2);
+
     private Integer value;
 
-    @Override
     public String toString() {
         return String.valueOf(value);
     }
