@@ -10,4 +10,3 @@ public class PositionModel {
     Double longitude;
     Double latitude;
 }
-

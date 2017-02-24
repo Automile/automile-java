@@ -17,4 +17,3 @@ public class PublishSubscribeModel {
     AuthenticationType authenticationType;
     String authenticationData;
 }
-

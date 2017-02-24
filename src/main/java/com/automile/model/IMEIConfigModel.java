@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class IMEIConfigModel {
@@ -14,4 +13,3 @@ public class IMEIConfigModel {
     Integer vehicleId;
     IMEIDeviceType deviceType;
 }
-

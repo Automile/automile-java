@@ -105,7 +105,4 @@ public class Vehicle2DetailModel {
     String nickname;
     Integer categoryColor;
     String tags;
-
-
 }
-

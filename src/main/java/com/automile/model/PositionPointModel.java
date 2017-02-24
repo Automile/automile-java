@@ -11,4 +11,3 @@ public class PositionPointModel {
     Double longitude;
     Double latitude;
 }
-

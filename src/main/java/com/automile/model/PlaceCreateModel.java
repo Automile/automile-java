@@ -17,6 +17,4 @@ public class PlaceCreateModel {
     TripType tripType;
     TripTypeTrigger tripTypeTrigger;
     Integer drivesBetweenAnotherPlaceId;
-
 }
-

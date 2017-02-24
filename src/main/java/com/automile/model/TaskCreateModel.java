@@ -13,4 +13,3 @@ public class TaskCreateModel {
     String taskMessageText;
     PositionModel position;
 }
-

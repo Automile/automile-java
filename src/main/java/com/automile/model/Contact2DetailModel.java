@@ -37,6 +37,4 @@ public class Contact2DetailModel {
     List<CompanyScopesModel> companiesScopes = Lists.newArrayList();
     Boolean isLocked;
     List<CustomCategoryModel> customCategories = Lists.newArrayList();
-
-
 }

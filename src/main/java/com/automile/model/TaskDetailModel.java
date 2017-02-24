@@ -17,4 +17,3 @@ public class TaskDetailModel {
     String taskAcquiredByContactName;
     List<TaskMessageModel> taskMessages = Lists.newArrayList();
 }
-

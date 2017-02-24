@@ -57,7 +57,7 @@ public class AutomileService {
         }
     }
 
-    public <T> T getByIdCall(Class<T> clazz, String url, NameValuePair... params) {
+    public <T> T getCall(Class<T> clazz, String url, NameValuePair... params) {
         validateToken();
         HttpUriRequest request = RequestBuilder.get(url)
                 .addHeader(getOauthHeader()).addParameters(params).build();
@@ -122,7 +122,7 @@ public class AutomileService {
             if (statusCode == HttpStatus.SC_CREATED) {
                 log.info("Response status code {}", statusCode);
                 Header location = response.getFirstHeader(org.apache.http.HttpHeaders.LOCATION);
-                return getByIdCall(clazz, location.getValue());
+                return getCall(clazz, location.getValue());
             }
             String responseString = getResponseString(response);
             if (StringUtils.isEmpty(responseString) || clazz == null) {

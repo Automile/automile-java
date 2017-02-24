@@ -22,5 +22,4 @@ public class Contact2CreateModel {
     String mobilePhoneNumber;
     MapType mapType;
     String currencyCode;
-
 }

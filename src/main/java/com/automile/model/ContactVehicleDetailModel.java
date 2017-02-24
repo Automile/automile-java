@@ -10,10 +10,14 @@ import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExpenseReportCreateModel {
+public class ContactVehicleDetailModel {
+    Integer contactVehicleId;
     Integer vehicleId;
+    String numberPlate;
+    String makeModelName;
     Integer contactId;
-    Integer tripId;
-    LocalDateTime expenseReportDateUtc;
-    List<ExpenseReportRowCreateModel> expenseReportRows = Lists.newArrayList();
+    String contactName;
+    LocalDateTime lastModified;
+    LocalDateTime created;
+    List<String> scopes = Lists.newArrayList();
 }

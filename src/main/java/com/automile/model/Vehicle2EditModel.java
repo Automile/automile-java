@@ -33,6 +33,4 @@ public class Vehicle2EditModel {
     String nickname;
     String tags;
     Integer categoryColor;
-
 }
-

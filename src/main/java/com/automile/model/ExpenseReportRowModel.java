@@ -24,6 +24,4 @@ public class ExpenseReportRowModel {
     String customCategory;
     Double categoryValue;
     String merchant;
-
 }
-

@@ -28,6 +28,4 @@ public class Vehicle2CreateModel {
     String nickname;
     String tags;
     Integer categoryColor;
-
 }
-

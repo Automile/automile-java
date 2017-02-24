@@ -12,4 +12,3 @@ public class ExpenseReportRowContentCreateModel {
     String data;
     ContentType contentType;
 }
-

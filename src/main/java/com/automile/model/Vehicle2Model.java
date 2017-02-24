@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Vehicle2Model {
@@ -40,4 +39,3 @@ public class Vehicle2Model {
     Integer categoryColor;
     String tags;
 }
-

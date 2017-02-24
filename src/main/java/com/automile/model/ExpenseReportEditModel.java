@@ -14,4 +14,3 @@ public class ExpenseReportEditModel {
     Integer tripId;
     LocalDateTime expenseReportDateUtc;
 }
-

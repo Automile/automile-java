@@ -9,18 +9,15 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PlaceModel {
-    Integer placeId;
+public class Place2EditModel {
     String name;
-    String description;
+    List<Integer> vehicleIds = Lists.newArrayList();
+    Integer radius;
     PositionPointModel positionPoint;
+    String description;
     TripType tripType;
     TripTypeTrigger tripTypeTrigger;
-    Integer radius;
-    Boolean isEditable;
-    List<Integer> vehicleIds = Lists.newArrayList();
     Integer drivesBetweenAnotherPlaceId;
 }

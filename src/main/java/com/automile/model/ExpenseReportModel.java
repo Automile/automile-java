@@ -17,6 +17,4 @@ public class ExpenseReportModel {
     Integer tripId;
     LocalDateTime expenseReportDateUtc;
     List<ExpenseReportRowModel> expenseReportRows = Lists.newArrayList();
-
 }
-

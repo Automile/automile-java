@@ -11,4 +11,3 @@ public class IMEIConfigEditModel {
     Integer vehicleId;
     IMEIDeviceType iMEIDeviceType;
 }
-

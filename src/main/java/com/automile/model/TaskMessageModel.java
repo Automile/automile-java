@@ -19,4 +19,3 @@ public class TaskMessageModel {
     Boolean messageIsRead;
     PositionModel position;
 }
-

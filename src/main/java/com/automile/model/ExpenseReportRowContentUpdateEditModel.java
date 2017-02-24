@@ -13,4 +13,3 @@ public class ExpenseReportRowContentUpdateEditModel {
     String data;
     ContentType contentType;
 }
-
