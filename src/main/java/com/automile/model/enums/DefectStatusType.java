@@ -3,11 +3,9 @@ package com.automile.model.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum AuthenticationType {
-    NoneAnonymous(0),
-    BasicUsernameAndPassword(1),
-    BearerToken(2),
-    Salesforce(3);
+public enum DefectStatusType {
+    NotResolved(0),
+    Resolved(1);
 
     private Integer value;
 

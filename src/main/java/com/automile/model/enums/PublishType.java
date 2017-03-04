@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum PublishType {
-    NUMBER_0(0);
+    JsonDefault(0);
 
     private Integer value;
 

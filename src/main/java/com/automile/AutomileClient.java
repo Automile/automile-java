@@ -28,6 +28,9 @@ import com.automile.model.ExpenseReportRowContentModel;
 import com.automile.model.ExpenseReportRowCreateModel;
 import com.automile.model.ExpenseReportRowEditModel;
 import com.automile.model.ExpenseReportRowModel;
+import com.automile.model.GeofenceCreateModel;
+import com.automile.model.GeofenceEditModel;
+import com.automile.model.GeofenceModel;
 import com.automile.model.IMEIConfigCreateModel;
 import com.automile.model.IMEIConfigDetailModel;
 import com.automile.model.IMEIConfigEditModel;
@@ -59,6 +62,19 @@ import com.automile.model.Vehicle2CreateModel;
 import com.automile.model.Vehicle2DetailModel;
 import com.automile.model.Vehicle2EditModel;
 import com.automile.model.Vehicle2Model;
+import com.automile.model.VehicleDefectCommentsCreateModel;
+import com.automile.model.VehicleDefectCommentsEditModel;
+import com.automile.model.VehicleDefectCommentsModel;
+import com.automile.model.VehicleDefectTypeModel;
+import com.automile.model.VehicleGeofenceCreateModel;
+import com.automile.model.VehicleGeofenceEditModel;
+import com.automile.model.VehicleGeofenceModel;
+import com.automile.model.VehicleInspectionCreateModel;
+import com.automile.model.VehicleInspectionEditModel;
+import com.automile.model.VehicleInspectionModel;
+import com.automile.model.VehiclePlaceCreateModel;
+import com.automile.model.VehiclePlaceEditModel;
+import com.automile.model.VehiclePlaceModel;
 import com.google.common.collect.Lists;
 import com.google.common.net.HttpHeaders;
 import lombok.AccessLevel;
@@ -79,6 +95,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.automile.AutomileConfig.CREATE_URL;
 import static com.automile.AutomileConfig.DELETE_URL;
@@ -1002,5 +1019,255 @@ public class AutomileClient {
     public void deleteUserDevice(int id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "userdevice", id));
     }
+
+    /**
+     * Creates a new vehicle defect comment
+     *
+     * @param model
+     * @return
+     */
+    public VehicleDefectCommentsModel createVehicleDefectComment(VehicleDefectCommentsCreateModel model) {
+        return automileService.createCall(model, VehicleDefectCommentsModel.class, format(CREATE_URL, "resourceowner", "vehicledefectcomments"));
+    }
+
+    /**
+     * Get all vehicle defect comments that the user has access to
+     *
+     * @return
+     */
+    public List<VehicleDefectCommentsModel> getVehicleDefectComments() {
+        return automileService.listCall(VehicleDefectCommentsModel.class, format(LIST_URL, "resourceowner", "vehicledefectcomments"));
+    }
+
+    /**
+     * Get a vehicle defect comment by id
+     *
+     * @param id
+     * @return
+     */
+    public VehicleDefectCommentsModel getVehicleDefectComment(int id) {
+        return automileService.getCall(VehicleDefectCommentsModel.class, format(GET_BY_ID_URL, "resourceowner", "vehicledefectcomments", id));
+    }
+
+    /**
+     * Update a vehicle defect comment
+     *
+     * @param id
+     * @param model
+     */
+    public void editVehicleDefectComment(int id, VehicleDefectCommentsEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "vehicledefectcomments", "userdevice", id));
+    }
+
+    /**
+     * Get all vehicle defect types
+     *
+     * @return
+     */
+    public List<VehicleDefectTypeModel> getVehicleDefectTypes() {
+        return automileService.listCall(VehicleDefectTypeModel.class, format(LIST_URL, "resourceowner", "vehicledefecttypes"));
+    }
+
+    /**
+     * Associate a vehicle with a geofence
+     *
+     * @param model
+     * @return
+     */
+    public VehicleGeofenceModel createVehicleGeofence(VehicleGeofenceCreateModel model) {
+        return automileService.createCall(model, VehicleGeofenceModel.class, format(CREATE_URL, "resourceowner", "vehiclegeofence"));
+    }
+
+    /**
+     * Get vehicle geofences
+     *
+     * @param geofenceId
+     * @return
+     */
+    public List<VehicleGeofenceModel> getVehicleGeofences(int geofenceId) {
+        BasicNameValuePair geofenceIdParam = new BasicNameValuePair("geofenceId", String.valueOf(geofenceId));
+        return automileService.listCall(VehicleGeofenceModel.class, format(LIST_URL, "resourceowner", "vehiclegeofence"), geofenceIdParam);
+    }
+
+    /**
+     * Get vehicle geofence by id
+     *
+     * @param id
+     * @return
+     */
+    public VehicleGeofenceModel getVehicleGeofence(int id) {
+        return automileService.getCall(VehicleGeofenceModel.class, format(GET_BY_ID_URL, "resourceowner", "vehiclegeofence", id));
+    }
+
+    /**
+     * Updates a vehicle geofence
+     *
+     * @param id
+     * @param model
+     */
+    public void editVehicleGeofence(int id, VehicleGeofenceEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "vehiclegeofence", id));
+    }
+
+    /**
+     * Removes association between a vehicle and geofence
+     *
+     * @param id
+     */
+    public void deleteVehicleGeofence(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "vehiclegeofence", id));
+    }
+
+    /**
+     * Creates a new geofence
+     *
+     * @param model
+     * @return
+     */
+    public GeofenceModel createGeofence(GeofenceCreateModel model) {
+        return automileService.createCall(model, GeofenceModel.class, format(CREATE_URL, "resourceowner", "geofence"));
+    }
+
+    /**
+     * Get a list of geofences user is associated with
+     *
+     * @return
+     */
+    public List<GeofenceModel> getGeofences() {
+        return automileService.listCall(GeofenceModel.class, format(LIST_URL, "resourceowner", "geofence"));
+    }
+
+    /**
+     * Get geofence by id
+     *
+     * @param id
+     * @return
+     */
+    public GeofenceModel getGeofence(int id) {
+        return automileService.getCall(GeofenceModel.class, format(GET_BY_ID_URL, "resourceowner", "geofence", id));
+    }
+
+    /**
+     * Updates the given geofence with new model
+     *
+     * @param id
+     * @param model
+     */
+    public void editGeofence(int id, GeofenceEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "geofence", id));
+    }
+
+    /**
+     * Removes the given geofence
+     *
+     * @param id
+     */
+    public void deleteGeofence(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "geofence", id));
+    }
+
+    /**
+     * Creates a new vehicle inspection
+     *
+     * @param model
+     * @return
+     */
+    public VehicleInspectionModel createVehicleInspection(VehicleInspectionCreateModel model) {
+        return automileService.createCall(model, VehicleInspectionModel.class, format(CREATE_URL, "resourceowner", "vehicleinspection"));
+    }
+
+
+    /**
+     * Get all vehicle inspections that the user has access to
+     *
+     * @param vehicleInspectionId
+     * @param vehicleId
+     * @param fromDate
+     * @param toDate
+     * @param excludeArchived
+     * @return
+     */
+    public List<VehicleInspectionModel> getVehicleInspections(Integer vehicleInspectionId, Integer vehicleId,
+                                                              LocalDateTime fromDate, LocalDateTime toDate, boolean excludeArchived) {
+        List<NameValuePair> params = Lists.newArrayList();
+        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("vehicleInspectionId", vehicleInspectionId, params));
+        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("vehicleId", vehicleId, params));
+        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("fromDate", fromDate, params));
+        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("toDate", toDate, params));
+        automileService.addParam("excludeArchived", excludeArchived, params);
+        return automileService.listCall(VehicleInspectionModel.class, format(LIST_URL, "resourceowner", "vehicleinspection"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get a vehicle inspection
+     *
+     * @param id
+     * @return
+     */
+    public VehicleInspectionModel getVehicleInspection(int id) {
+        return automileService.getCall(VehicleInspectionModel.class, format(GET_BY_ID_URL, "resourceowner", "vehicleinspection", id));
+    }
+
+    /**
+     * Updates the given vehicle inspection with new model
+     *
+     * @param id
+     * @param model
+     */
+    public void editVehicleInspection(int id, VehicleInspectionEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "vehicleinspection", id));
+    }
+
+    /**
+     * Associate a vehicle with a place
+     *
+     * @param model
+     * @return
+     */
+    public VehiclePlaceModel createVehiclePlace(VehiclePlaceCreateModel model) {
+        return automileService.createCall(model, VehiclePlaceModel.class, format(CREATE_URL, "resourceowner", "vehicleplace"));
+    }
+
+    /**
+     * Get relationships between the vehicles and the place
+     *
+     * @param placeId
+     * @return
+     */
+    public List<VehiclePlaceModel> getVehiclePlaces(int placeId) {
+        BasicNameValuePair geofenceIdParam = new BasicNameValuePair("placeId", String.valueOf(placeId));
+        return automileService.listCall(VehiclePlaceModel.class, format(LIST_URL, "resourceowner", "vehicleplace"), geofenceIdParam);
+    }
+
+    /**
+     * Get vehicle place
+     *
+     * @param id
+     * @return
+     */
+    public VehiclePlaceModel getVehiclePlace(int id) {
+        return automileService.getCall(VehiclePlaceModel.class, format(GET_BY_ID_URL, "resourceowner", "vehicleplace", id));
+    }
+
+    /**
+     * Edit the relationship between the vehicle and the place
+     *
+     * @param id
+     * @param model
+     */
+    public void editVehiclePlace(int id, VehiclePlaceEditModel model) {
+        automileService.editCall(model, format(EDIT_URL, "resourceowner", "vehicleplace", id));
+    }
+
+    /**
+     * Removes association between a vehicle and place
+     *
+     * @param id
+     */
+    public void deleteVehiclePlace(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "vehicleplace", id));
+    }
+
 
 }

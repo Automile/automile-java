@@ -3,11 +3,10 @@ package com.automile.model.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum AuthenticationType {
-    NoneAnonymous(0),
-    BasicUsernameAndPassword(1),
-    BearerToken(2),
-    Salesforce(3);
+public enum GeofenceType {
+    Outside(0),
+    Inside(1),
+    OutsideAndInside(2);
 
     private Integer value;
 
