@@ -84,17 +84,17 @@ public class AutomileService {
         }
     }
 
-    public <T> T createCall(Object model, Class<T> clazz, String url) {
+    public <T> T postCall(Object model, Class<T> clazz, String url) {
         validateToken();
         HttpUriRequest request = RequestBuilder.post(url)
                 .addHeader(getOauthHeader()).setEntity(getEntity(model)).build();
         return executeAndConvert(clazz, request);
     }
 
-    public void editCall(Object model, String url) {
+    public void putCall(Object model, String url, NameValuePair... params) {
         validateToken();
         HttpUriRequest request = RequestBuilder.put(url)
-                .addHeader(getOauthHeader()).setEntity(getEntity(model)).build();
+                .addHeader(getOauthHeader()).addParameters(params).setEntity(getEntity(model)).build();
         executeAndConvert(null, request);
     }
 

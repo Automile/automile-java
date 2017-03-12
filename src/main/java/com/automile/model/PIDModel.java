@@ -1,14 +1,15 @@
 package com.automile.model;
 
-import com.automile.model.enums.AttachmentType;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class VehicleDefectAttachmentEditModel {
-    Integer vehicleDefectAttachmentId;
-    AttachmentType attachmentType;
+public class PIDModel {
     String data;
+    LocalDateTime recordTimeStamp;
+    Double value;
 }

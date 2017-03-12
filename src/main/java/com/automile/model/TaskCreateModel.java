@@ -12,4 +12,5 @@ public class TaskCreateModel {
     Integer toContactId;
     String taskMessageText;
     PositionModel position;
+    String title;
 }

@@ -26,4 +26,5 @@ public class TaskModel {
     TaskStatusType taskStatusType;
     TaskType taskType;
     Integer unreadTaskMessages;
+    String title;
 }

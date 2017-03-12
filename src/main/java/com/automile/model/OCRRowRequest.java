@@ -1,13 +1,14 @@
 package com.automile.model;
 
-import com.automile.model.enums.TaskStatusType;
+import com.automile.model.enums.RequestType;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TaskEditModel {
-    TaskStatusType taskStatusType;
-    String title;
+public class OCRRowRequest {
+    String id;
+    String imageData;
+    RequestType requestType;
 }

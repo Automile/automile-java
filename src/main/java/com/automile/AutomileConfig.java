@@ -25,7 +25,11 @@ public class AutomileConfig {
     static final String EDIT_URL = BASE_URL_V1 + "/%s/%s/%s";
     static final String GET_BY_ID_URL = BASE_URL_V1 + "/%s/%s/%s";
     static final String DELETE_URL = BASE_URL_V1 + "/%s/%s/%s";
-    static final String PUBLISH_SUBSCRIBE_TEST_URL = BASE_URL_V1 + "/resurceowner/publishsubscribe/%s/%s";
+    static final String PUBLISH_SUBSCRIBE_TEST_URL = BASE_URL_V1 + "/resourceowner/publishsubscribe/%s/%s";
+    static final String IMEI_EVENTS_URL = BASE_URL_V1 + "/resourceowner/imeievents/%s/%s";
+    static final String TRIPS_GET_URL = BASE_URL_V1 + "/resourceowner/trips/%s/%s";
+    static final String TRIPS_GET_PID_URL = BASE_URL_V1 + "/resourceowner/trips/%s/pid/%s";
+    static final String VEHICLE_HEALTH_GET_OVER_PERIOD_URL = BASE_URL_V1 + "/resourceowner/vehiclehealth/%s/%s";
 
     private static final int TIMEOUT = 30;
 
