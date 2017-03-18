@@ -2,6 +2,8 @@ package com.automile;
 
 import com.automile.model.AmbientAirTemperatureModel;
 import com.automile.model.AuthResponse;
+import com.automile.model.ChangePasswordModel;
+import com.automile.model.ChangeUserNameModel;
 import com.automile.model.CompanyContactCreateModel;
 import com.automile.model.CompanyContactDetailModel;
 import com.automile.model.CompanyContactEditModel;
@@ -20,8 +22,11 @@ import com.automile.model.ContactModel;
 import com.automile.model.ContactVehicleCreateModel;
 import com.automile.model.ContactVehicleDetailModel;
 import com.automile.model.ContactVehicleEditModel;
+import com.automile.model.CustomCategoryModel;
+import com.automile.model.CustomCategoryPostModel;
 import com.automile.model.EmailExpenseReportModel;
 import com.automile.model.EmailExpenseReportsModel;
+import com.automile.model.EmailTripReportModel;
 import com.automile.model.EngineCoolantTemperatureModel;
 import com.automile.model.ExpenseReportCreateModel;
 import com.automile.model.ExpenseReportEditModel;
@@ -47,6 +52,9 @@ import com.automile.model.IMEIEventStatusModel;
 import com.automile.model.MovePushTriggers;
 import com.automile.model.OCRRequest;
 import com.automile.model.OCRResult;
+import com.automile.model.OrganizationEditModel;
+import com.automile.model.OrganizationModel;
+import com.automile.model.OrganizationNodeModel;
 import com.automile.model.PIDModel;
 import com.automile.model.Place2CreateModel;
 import com.automile.model.Place2EditModel;
@@ -57,6 +65,7 @@ import com.automile.model.PublishSubscribeCreateModel;
 import com.automile.model.PublishSubscribeEditModel;
 import com.automile.model.PublishSubscribeModel;
 import com.automile.model.RPMModel;
+import com.automile.model.ResetPasswordUserModel;
 import com.automile.model.TaskCreateModel;
 import com.automile.model.TaskDetailModel;
 import com.automile.model.TaskEditModel;
@@ -64,6 +73,7 @@ import com.automile.model.TaskMessageCreateModel;
 import com.automile.model.TaskMessageEditModel;
 import com.automile.model.TaskMessageModel;
 import com.automile.model.TaskModel;
+import com.automile.model.TransportstyrelsenInfoModel;
 import com.automile.model.TriggerCreateModel;
 import com.automile.model.TriggerDetailModel;
 import com.automile.model.TriggerEditModel;
@@ -77,14 +87,18 @@ import com.automile.model.TripEditModel;
 import com.automile.model.TripGeoModel;
 import com.automile.model.TripModel;
 import com.automile.model.TripStartEndGeoModel;
+import com.automile.model.TripSummaryReportModel;
 import com.automile.model.TripSynchronized;
 import com.automile.model.UserDeviceCreateModel;
 import com.automile.model.UserDeviceEditModel;
 import com.automile.model.UserDeviceModel;
+import com.automile.model.UserExistingPasswordModel;
+import com.automile.model.UserModel;
 import com.automile.model.Vehicle2CreateModel;
 import com.automile.model.Vehicle2DetailModel;
 import com.automile.model.Vehicle2EditModel;
 import com.automile.model.Vehicle2Model;
+import com.automile.model.VehicleCheckInModel;
 import com.automile.model.VehicleDefectCommentsCreateModel;
 import com.automile.model.VehicleDefectCommentsEditModel;
 import com.automile.model.VehicleDefectCommentsModel;
@@ -101,6 +115,9 @@ import com.automile.model.VehiclePlaceCreateModel;
 import com.automile.model.VehiclePlaceEditModel;
 import com.automile.model.VehiclePlaceModel;
 import com.automile.model.VehicleSpeedModel;
+import com.automile.model.VehicleStatusModel;
+import com.automile.model.VehicleSummaryModel;
+import com.automile.model.VehiclesSummaryModel;
 import com.google.common.collect.Lists;
 import com.google.common.net.HttpHeaders;
 import lombok.AccessLevel;
@@ -127,11 +144,16 @@ import static com.automile.AutomileConfig.CREATE_URL;
 import static com.automile.AutomileConfig.DELETE_URL;
 import static com.automile.AutomileConfig.EDIT_URL;
 import static com.automile.AutomileConfig.GET_BY_ID_URL;
+import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORIES_URL;
+import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORY_URL;
 import static com.automile.AutomileConfig.IMEI_EVENTS_URL;
 import static com.automile.AutomileConfig.LIST_URL;
 import static com.automile.AutomileConfig.PUBLISH_SUBSCRIBE_TEST_URL;
 import static com.automile.AutomileConfig.TRIPS_GET_PID_URL;
 import static com.automile.AutomileConfig.TRIPS_GET_URL;
+import static com.automile.AutomileConfig.USER_ACTION_URL;
+import static com.automile.AutomileConfig.USER_URL;
+import static com.automile.AutomileConfig.VEHICLES2_ACTION_URL;
 import static com.automile.AutomileConfig.VEHICLE_HEALTH_GET_OVER_PERIOD_URL;
 import static com.automile.AutomileConfig.getHttpClient;
 import static com.automile.AutomileConfig.getMapper;
@@ -380,6 +402,93 @@ public class AutomileClient {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "contacts2", id));
     }
 
+    /**
+     * Get the contact representing myself
+     *
+     * @return
+     */
+    public Contact2DetailModel getContact2Me() {
+        return automileService.getCall(Contact2DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts2", "me"));
+    }
+
+    /**
+     * Get contact profile image
+     *
+     * @return
+     */
+    //TODO: response?
+    public Contact2DetailModel getContact2MeImage() {
+        return automileService.getCall(Contact2DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts2", "me/image"));
+    }
+
+    /**
+     * Upload contact profile image
+     *
+     * @param data
+     * @return
+     */
+    //TODO: request?
+    public void editContact2UploadImage(byte[] data) {
+        automileService.postCall(data, null, format(EDIT_URL, "resourceowner", "contacts2/me", "uploadimage"));
+    }
+
+    /**
+     * Removes the users profile image
+     *
+     * @return
+     */
+    public void editContact2RemoveImage() {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts2/me", "removeimage"));
+    }
+
+    /**
+     * Updates the default vehicle
+     *
+     * @param vehicleId
+     * @return
+     */
+    public void editContact2MeUpdateDefaultVehicle(int vehicleId) {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts2/me/updatedefaultvehicle", vehicleId));
+    }
+
+    /**
+     * Updates the default vehicle
+     *
+     * @param vehicleId
+     * @return
+     */
+    public void editContact2UpdateDefaultVehicle(int vehicleId) {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts2", "updatedefaultvehicle", vehicleId));
+    }
+
+    /**
+     * Add and remove custom categories
+     *
+     * @param model
+     * @return
+     */
+    public void editContact2CustomCategories(CustomCategoryPostModel model) {
+        automileService.postCall(model, null, format(CREATE_URL, "resourceowner", "contacts2/customcategory"));
+    }
+
+    /**
+     * Get a custom category
+     *
+     * @return
+     */
+    public CustomCategoryModel getContacts2CustomCategory(int contactId, int customCategoryId) {
+        return automileService.getCall(CustomCategoryModel.class, format(GET_CONTACT2_CUSTOM_CATEGORY_URL, contactId, customCategoryId));
+    }
+
+    /**
+     * Get a all custom categories
+     *
+     * @return
+     */
+    public List<CustomCategoryModel> getContacts2CustomCategories(int contactId) {
+        return automileService.listCall(CustomCategoryModel.class, format(GET_CONTACT2_CUSTOM_CATEGORIES_URL, contactId));
+    }
+
 
     /**
      * Creates a new vehicle
@@ -428,6 +537,45 @@ public class AutomileClient {
     public void deleteVehicle2(int id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "vehicles2", id));
     }
+
+    /**
+     * Returns the external information we have on the vehicle
+     *
+     * @param identifier
+     * @param identifierType
+     * @return
+     */
+    public TransportstyrelsenInfoModel getVehicle2VehicleInformation(String identifier, byte identifierType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("identifier", identifier, params);
+        automileService.addParam("identifierType", identifierType, params);
+        return automileService.getCall(TransportstyrelsenInfoModel.class, format(VEHICLES2_ACTION_URL, "VehicleInformation"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get position and status of all vehicles that the user has access to
+     *
+     * @return
+     */
+    public List<VehicleStatusModel> getVehicles2Status() {
+        return automileService.listCall(VehicleStatusModel.class, format(VEHICLES2_ACTION_URL, "status"));
+    }
+
+    /**
+     * Check-in to a vehicle
+     */
+    public void editVehicle2Checkin(VehicleCheckInModel model) {
+        automileService.postCall(model, null, format(VEHICLES2_ACTION_URL, "checkin"));
+    }
+
+    /**
+     * Check-out from a vehicle
+     */
+    public void editVehicle2Checkout() {
+        automileService.postCall(null, null, format(VEHICLES2_ACTION_URL, "checkout"));
+    }
+
 
     /**
      * Creates a new vehicle contact and associates it with user
@@ -795,7 +943,6 @@ public class AutomileClient {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "place", id));
     }
 
-
     /**
      * Creates a new place
      *
@@ -815,7 +962,6 @@ public class AutomileClient {
     public void editPlace2(int id, Place2EditModel model) {
         automileService.putCall(model, format(EDIT_URL, "resourceowner", "place2", id));
     }
-
 
     /**
      * Create an a publish subscribe record
@@ -864,7 +1010,6 @@ public class AutomileClient {
     public void deletePublishSubscribe(int id) {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "publishsubscribe", id));
     }
-
 
     /**
      * Publishes a test trip start to the publish subscribe endpoint
@@ -930,6 +1075,51 @@ public class AutomileClient {
     public void testContactModified(int publishSubscribeId, int contactId) {
         BasicNameValuePair contactIdParam = new BasicNameValuePair("contactId", String.valueOf(contactId));
         automileService.getCall(null, format(PUBLISH_SUBSCRIBE_TEST_URL, publishSubscribeId, "testcontactmodified"), contactIdParam);
+    }
+
+    /**
+     * Get a trip summary report
+     *
+     * @return
+     */
+    public List<TripSummaryReportModel> getReportsTripSummary(String dateperiod) {
+        return automileService.listCall(TripSummaryReportModel.class, format(LIST_URL, "resourceowner/reports/tripsummary", dateperiod));
+    }
+
+    /**
+     * Get a trip summary report filtered by vehicle
+     *
+     * @return
+     */
+    public List<TripSummaryReportModel> getReportsTripSummary(String dateperiod, int vehicleId) {
+        return automileService.listCall(TripSummaryReportModel.class, format(GET_BY_ID_URL, "resourceowner/reports/tripsummary", dateperiod, vehicleId));
+    }
+
+    /**
+     * Get vehicles summary report
+     *
+     * @return
+     */
+    public List<VehiclesSummaryModel> getReportsVehiclesSummary(String dateperiod) {
+        return automileService.listCall(VehiclesSummaryModel.class, format(LIST_URL, "resourceowner/reports/vehiclessummary", dateperiod));
+    }
+
+    /**
+     * Get a vehicle summary report
+     *
+     * @return
+     */
+    public VehicleSummaryModel getReportVehicleSummary(String dateperiod, int vehicleId) {
+        return automileService.getCall(VehicleSummaryModel.class, format(GET_BY_ID_URL, "resourceowner/reports/vehiclesummary", dateperiod, vehicleId));
+    }
+
+    /**
+     * Export a trip report in pdf format
+     *
+     * @param model
+     */
+    public void emailTripReport(EmailTripReportModel model) {
+        automileService.postCall(model, null, format(EDIT_URL, "resourceowner", "reports", "emailtripreport"));
     }
 
     /**
@@ -1076,6 +1266,50 @@ public class AutomileClient {
      */
     public void editTriggerUnmute(int id) {
         automileService.putCall("", format(EDIT_URL, "resourceowner", "triggers/unmute", id));
+    }
+
+
+    /**
+     * This get's the details of the current user that you are logged in as
+     *
+     * @return
+     */
+    public UserModel getUser() {
+        return automileService.getCall(UserModel.class, USER_URL);
+    }
+
+    /**
+     * Change the password of the current user that you are logged in as
+     *
+     * @param model
+     */
+    public void editUserChangePassword(ChangePasswordModel model) {
+        automileService.putCall(model, format(USER_ACTION_URL, "changepassword"));
+    }
+
+    /**
+     * Change the username of the current user that you are logged in as
+     *
+     * @param model
+     */
+    public void editUserChangeUsername(ChangeUserNameModel model) {
+        automileService.putCall(model, format(USER_ACTION_URL, "changeusername"));
+    }
+
+    /**
+     * Check if the user has a password set
+     */
+    public void getUserExistingPassword() {
+        automileService.getCall(UserExistingPasswordModel.class, format(USER_ACTION_URL, "userexistingpassword"));
+    }
+
+    /**
+     * Reset the password by SMS for the current user logged in
+     *
+     * @param model
+     */
+    public void editUserResetPassword(ResetPasswordUserModel model) {
+        automileService.postCall(model, null, format(USER_ACTION_URL, "resetpassword"));
     }
 
     /**
@@ -1254,7 +1488,6 @@ public class AutomileClient {
      * @param contactId
      * @return
      */
-    //TODO: why not object?
     public void editTripSetDriverOnTrip(int tripId, int contactId) {
         List<NameValuePair> params = Lists.newArrayList();
         automileService.addParam("tripId", tripId, params);
@@ -1619,5 +1852,31 @@ public class AutomileClient {
         automileService.deleteCall(format(DELETE_URL, "resourceowner", "vehicleplace", id));
     }
 
+    /**
+     * Get a the details of the organization the user is assoicates with
+     *
+     * @return
+     */
+    public OrganizationModel getOrganization() {
+        return automileService.getCall(OrganizationModel.class, format(LIST_URL, "resourceowner", "organization"));
+    }
+
+    /**
+     * Updates the organization
+     *
+     * @return
+     */
+    public void editOrganization() {
+        automileService.putCall(OrganizationEditModel.class, format(LIST_URL, "resourceowner", "organization"));
+    }
+
+    /**
+     * Get the organization hierarchy
+     *
+     * @return
+     */
+    public OrganizationNodeModel getOrganizationHierarchy() {
+        return automileService.getCall(OrganizationNodeModel.class, format(GET_BY_ID_URL, "resourceowner", "organization", "hierarchy"));
+    }
 
 }

@@ -13,6 +13,6 @@ public class TripGeoModel {
     Double latitude;
     Double longitude;
     Integer headingDegrees;
-    byte[] numberOfSatellites;
-    byte[] HDOP;
+    short numberOfSatellites;
+    short HDOP;
 }

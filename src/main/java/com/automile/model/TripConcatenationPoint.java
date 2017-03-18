@@ -17,7 +17,6 @@ public class TripConcatenationPoint {
     Double speed;
     Double RPM;
     Integer headingDegress;
-    byte[] hdop;
-    //TODO: byte?
-    byte[] numberOfSatellites;
+    short hdop;
+    short numberOfSatellites;
 }

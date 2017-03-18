@@ -14,8 +14,7 @@ public class MILEvent {
     MILStatus mILStatus;
     Integer mILDistance;
     Double cLRDistanceUntilToday;
-    //TODO: bytes?
-    byte[] numberOfDTCs;
+    short numberOfDTCs;
     Double latitude;
     Double longitude;
 }

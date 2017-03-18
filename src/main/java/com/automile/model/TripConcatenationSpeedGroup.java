@@ -14,8 +14,7 @@ public class TripConcatenationSpeedGroup {
     Boolean speedingForMoreThan30Seconds;
     Double distanceOfSpeeding;
     Integer distanceInSeconds;
-    //TODO: byte?
-    byte[] thresholdType;
+    short thresholdType;
     List<TripConcatenationSpeedPoint> speedPoints = Lists.newArrayList();
 }
 

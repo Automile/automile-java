@@ -30,6 +30,11 @@ public class AutomileConfig {
     static final String TRIPS_GET_URL = BASE_URL_V1 + "/resourceowner/trips/%s/%s";
     static final String TRIPS_GET_PID_URL = BASE_URL_V1 + "/resourceowner/trips/%s/pid/%s";
     static final String VEHICLE_HEALTH_GET_OVER_PERIOD_URL = BASE_URL_V1 + "/resourceowner/vehiclehealth/%s/%s";
+    static final String VEHICLES2_ACTION_URL = BASE_URL_V1 + "/resourceowner/vehicles2/%s";
+    static final String USER_URL = BASE_URL_V1 + "/resourceowner/user";
+    static final String USER_ACTION_URL = USER_URL + "/%s";
+    static final String GET_CONTACT2_CUSTOM_CATEGORIES_URL = BASE_URL_V1 + "/resourceowner/contacts2/%s/customcategories";
+    static final String GET_CONTACT2_CUSTOM_CATEGORY_URL = GET_CONTACT2_CUSTOM_CATEGORIES_URL + "/%s";
 
     private static final int TIMEOUT = 30;
 

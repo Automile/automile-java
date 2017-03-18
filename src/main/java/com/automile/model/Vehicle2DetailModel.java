@@ -16,6 +16,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Vehicle2DetailModel {
     String vehicleIdentificationNumber;
+    Integer vehicleId;
     String numberPlate;
     String make;
     String model;
@@ -76,7 +77,7 @@ public class Vehicle2DetailModel {
     Integer displacementCm3;
     Double vehicleMatureTax;
     Double vehicleTax;
-    byte[] maxNumberOfPassengers;
+    short maxNumberOfPassengers;
     Double curbWeightKg;
     Double grossWeightKg;
     Double taxWeightKg;

@@ -31,7 +31,6 @@ public class TripModel {
     Integer parkedForMinutesUntilNextTrip;
     Boolean hasDrivingEvents;
     String customCategory;
-    //TODO: LIST?
     String tripTags;
     Boolean hideStartRoute;
     Boolean hideEndRoute;

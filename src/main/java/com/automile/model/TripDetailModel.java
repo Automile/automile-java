@@ -16,7 +16,7 @@ public class TripDetailModel {
     Integer tripStartTimeZone;
     Integer tripStartODOMeter;
     Integer tripNumber;
-    byte[] numberOfSupportedPIDs;
+    short numberOfSupportedPIDs;
     String vehicleIdentificationNumber;
     String vechicleProtocol;
     LocalDateTime tripEndDateTime;
@@ -35,7 +35,7 @@ public class TripDetailModel {
     Integer idleTimeInSecondsAllTrip;
     Integer idleTimeInSecondsFromStart;
     Integer idleRPMMax;
-    byte[] maxSpeed;
+    short maxSpeed;
     Integer maxRPM;
     Double cO2EmissionInGrams;
     Double odometerInKilometersAfterTripEnded;

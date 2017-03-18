@@ -6,7 +6,9 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomCategoryModel {
-    Integer customCategoryId;
-    String value;
+public class IdleTimeReportModel {
+    Integer businessIdleTimeInMinutes;
+    Integer personalIdleTimeInMinutes;
+    Integer otherIdleTimeInMinutes;
+    Integer period;
 }

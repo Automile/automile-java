@@ -12,8 +12,7 @@ public class TripDataAccelerometerModel {
     Double xAccelerationInG;
     Double yAccelerationInG;
     Double zAccelerationInG;
-    //TODO:bytes?
-    byte[] sampleNumber;
+    short sampleNumber;
     LocalDateTime recordTimeStamp;
     Boolean isNormalized;
 }

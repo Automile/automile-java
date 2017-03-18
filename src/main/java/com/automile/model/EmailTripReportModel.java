@@ -4,14 +4,13 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
-
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EmailExpenseReportsModel {
+public class EmailTripReportModel {
     Integer vehicleId;
-    LocalDateTime fromDate;
-    LocalDateTime toDate;
+    Integer period;
     String toEmail;
     String iSO639LanguageCode;
+    Boolean excludeDetailsForPersonalTrips;
+    Boolean excludeEnvironmentalAndFuelData;
 }

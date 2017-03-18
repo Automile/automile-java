@@ -6,7 +6,9 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomCategoryModel {
-    Integer customCategoryId;
-    String value;
+public class FuelReportModel {
+    Double businessFuelInLiters;
+    Double personalFuelInLiters;
+    Double otherFuelInLiters;
+    Integer period;
 }
