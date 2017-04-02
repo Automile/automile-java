@@ -181,6 +181,17 @@ public class AutomileClient {
         this.password = password;
     }
 
+    public void authorize(String data) {
+        try {
+            AuthResponse authResponse = getMapper().readValue(data, AuthResponse.class);
+            authResponse.setExpirationDate(LocalDateTime.now().plusSeconds(authResponse.getExpiresIn()));
+            automileService.setAuthResponse(authResponse);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+            throw new AutomileException(e);
+        }
+    }
+
     public void authorize() {
         if (StringUtils.isAnyEmpty(clientId, clientSecret, username, password)) {
             throw new AutomileException("Please configure all parameters");
@@ -690,7 +701,7 @@ public class AutomileClient {
     }
 
     /**
-     * Export an expense report in pdf format
+     * Export an expense reports in pdf format
      *
      * @param model
      */
@@ -748,7 +759,7 @@ public class AutomileClient {
 
 
     /**
-     * Create an expense report row
+     * Create an expense report row content
      *
      * @param model
      * @return
@@ -1299,8 +1310,8 @@ public class AutomileClient {
     /**
      * Check if the user has a password set
      */
-    public void getUserExistingPassword() {
-        automileService.getCall(UserExistingPasswordModel.class, format(USER_ACTION_URL, "userexistingpassword"));
+    public UserExistingPasswordModel getUserExistingPassword() {
+        return automileService.getCall(UserExistingPasswordModel.class, format(USER_ACTION_URL, "userexistingpassword"));
     }
 
     /**
@@ -1462,12 +1473,11 @@ public class AutomileClient {
      * @param width
      * @return
      */
-    //TODO: check response
-    public void getTripGoogleUrlToStaticMapEncodedPolyline(int id, int height, int width) {
+    public String getTripGoogleUrlToStaticMapEncodedPolyline(int id, int height, int width) {
         List<NameValuePair> params = Lists.newArrayList();
         automileService.addParam("height", height, params);
         automileService.addParam("width", width, params);
-        automileService.getCall(null, format(TRIPS_GET_URL, id, "googleurltostaticmapencodedpolyline"),
+        return automileService.getCall(String.class, format(TRIPS_GET_URL, id, "googleurltostaticmapencodedpolyline"),
                 params.toArray(new NameValuePair[params.size()]));
     }
 
@@ -1864,10 +1874,10 @@ public class AutomileClient {
     /**
      * Updates the organization
      *
-     * @return
+     * @param model
      */
-    public void editOrganization() {
-        automileService.putCall(OrganizationEditModel.class, format(LIST_URL, "resourceowner", "organization"));
+    public void editOrganization(OrganizationEditModel model) {
+        automileService.putCall(model, format(LIST_URL, "resourceowner", "organization"));
     }
 
     /**
