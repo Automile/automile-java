@@ -35,6 +35,8 @@ public class AutomileConfig {
     static final String USER_ACTION_URL = USER_URL + "/%s";
     static final String GET_CONTACT2_CUSTOM_CATEGORIES_URL = BASE_URL_V1 + "/resourceowner/contacts2/%s/customcategories";
     static final String GET_CONTACT2_CUSTOM_CATEGORY_URL = GET_CONTACT2_CUSTOM_CATEGORIES_URL + "/%s";
+    static final String GET_CONTACT3_CUSTOM_CATEGORIES_URL = BASE_URL_V1 + "/resourceowner/contacts3/%s/customcategories";
+    static final String GET_CONTACT3_CUSTOM_CATEGORY_URL = GET_CONTACT3_CUSTOM_CATEGORIES_URL + "/%s";
 
     private static final int TIMEOUT = 30;
 

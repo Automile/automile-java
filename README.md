@@ -32,7 +32,7 @@ gradlew install
 
 Add installed dependency to your project via Gradle
 ```
-compile('com.automile:client:1.0.0')
+compile('com.automile:client:1.0.1')
 
 ```
 Add installed dependency to your project via Maven
@@ -40,7 +40,7 @@ Add installed dependency to your project via Maven
 <dependency>
     <groupId>com.automile</groupId>
     <artifactId>client</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -84,6 +84,7 @@ and we'll get to it as soon as possible.
 * [Company Contact](#company-contact-methods)
 * [Company Vehicle](#company-vehicle-methods)  
 * [Contact](#contact-methods)  
+* [Contact 3](#contact3-methods)  
 * [Vehicle](#vehicle-methods)  
 * [Contact Vehicle](#contact-vehicle-methods)
 * [Expense Report](#expense-report-methods)
@@ -92,6 +93,7 @@ and we'll get to it as soon as possible.
 * [IMEI Config](#imei-config-methods)
 * [IMEI Event](#imei-event-methods)
 * [Place](#place-methods)
+* [Place 3](#place3-methods)
 * [Publish Subscribe](#publish-subscribe-methods)
 * [Report](#report-methods)
 * [Task](#task-methods)
@@ -105,6 +107,7 @@ and we'll get to it as soon as possible.
 * [Vehicle Defect Type](#vehicle-defect-type-methods)
 * [Vehicle Geofence](#vehicle-geofence-methods)
 * [Geofence](#geofence-methods)
+* [Geofence2](#geofence2-methods)
 * [Vehicle Health](#vehicle-health-methods)
 * [Vehicle Inspection](#vehicle-inspection-methods)
 * [Vehicle Place](#vehicle-place-methods)
@@ -303,10 +306,99 @@ public void test(AutomileClient cl){
     cl.getContacts2CustomCategory(1, 1);
 }
 ```
-#### Get a all custom categories
+#### Get all custom categories
 ```java 
 public void test(AutomileClient cl){
     cl.getContacts2CustomCategories(1);
+}
+```
+
+### Contact 3 Methods
+
+#### Create contact
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    Contact3CreateModel model = new Contact3CreateModel();
+    cl.createContact3(model);
+}
+```
+#### Get contacts
+```java 
+public void test(AutomileClient cl){
+    cl.getContacts3();
+    }
+```
+#### Get contact
+```java 
+public void test(AutomileClient cl){
+    cl.getContact3(1);
+}
+```
+#### Edit contact
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    Contact3EditModel model = new Contact3EditModel();
+    cl.editContact3(1, model);
+}
+```
+#### Delete contact
+```java 
+public void test(AutomileClient cl){
+    cl.deleteContact3(1);
+}
+```
+#### Get me
+```java 
+public void test(AutomileClient cl){
+    cl.getContact3Me();
+}
+```
+#### Get profile image
+```java 
+public void test(AutomileClient cl){
+    cl.getContact3MeImage();
+}
+```
+#### Upload profile image
+```java 
+public void test(AutomileClient cl, byte[] data){
+    cl.editContact3UploadImage(data);
+}
+```
+#### Remove profile image
+```java 
+public void test(AutomileClient cl){
+    cl.editContact3RemoveImage();
+}
+```
+#### Update the default vehicle
+```java 
+public void test(AutomileClient cl){
+    cl.editContact3MeUpdateDefaultVehicle(1);
+    //or
+    cl.editContact3UpdateDefaultVehicle(1);
+}
+```
+#### Add and remove custom categories
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    CustomCategoryPostModel model = new CustomCategoryPostModel();
+    cl.editContact3CustomCategories(1, model);
+}
+```
+#### Get a custom category
+```java 
+public void test(AutomileClient cl){
+    cl.getContacts3CustomCategory(1, 1);
+}
+```
+#### Get a all custom categories
+```java 
+public void test(AutomileClient cl){
+    cl.getContacts3CustomCategories(1);
 }
 ```
 
@@ -459,7 +551,13 @@ public void test(AutomileClient cl){
 public void test(AutomileClient cl){
     //init model and set fields using model.setXXX
     EmailExpenseReportsModel model = new EmailExpenseReportsModel();
-    cl.emailExpenseReportExport(model);
+    cl.emailExpenseReportsExport(model);
+}
+```
+#### Removes the given expense report rows
+```java 
+public void test(AutomileClient cl){
+    cl.deleteExpenseReportRows(1);
 }
 ```
 #### Carry out optical character recognization on image fragments and return the response
@@ -639,6 +737,43 @@ public void test(AutomileClient cl){
     cl.deletePlace(1);
 }
 ```
+
+### Place 3 Methods
+
+#### Create place
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    Place3CreateModel model = new Place3CreateModel();
+    cl.createPlace3(model);
+}
+```
+#### Get places
+```java 
+public void test(AutomileClient cl){
+    cl.getPlaces3();
+}
+```
+#### Get place
+```java 
+public void test(AutomileClient cl){
+    cl.getPlace3(1);
+}
+```
+#### Edit place
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    Place3EditModel model = new Place3EditModel();
+    cl.editPlace3(1, model);
+}
+```
+#### Delete place
+```java 
+public void test(AutomileClient cl){
+    cl.deletePlace3(1);
+}
+```
   
 ### Publish Subscribe Methods
 
@@ -746,6 +881,12 @@ public void test(AutomileClient cl){
     EmailTripReportModel model = new EmailTripReportModel();
     cl.emailTripReport(1, model);
 }
+```
+#### Get Geofence log report
+```java 
+public void test(AutomileClient cl){
+     cl.geofenceLogReport(1, 1, LocalDateTime.now(), LocalDateTime.now(), true);
+ }
 ```
 
 ### Task Methods
@@ -1175,6 +1316,43 @@ public void test(AutomileClient cl){
 ```java 
 public void test(AutomileClient cl){
     cl.deleteGeofence(1);
+}
+```
+
+### Geofence 2 Methods
+
+#### Creates a new geofence
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    GeofenceCreate2Model model = new GeofenceCreate2Model();
+    cl.createGeofence2(model);
+}
+```
+#### Get geofences
+```java 
+public void test(AutomileClient cl){
+    cl.getGeofences2();
+}
+```
+#### Get geofence
+```java 
+public void test(AutomileClient cl){
+    cl.getGeofence2(1);
+}
+```
+#### Edit geofence
+```java 
+public void test(AutomileClient cl){
+    //init model and set fields using model.setXXX
+    GeofenceEditModel2 model = new GeofenceEditModel2();
+    cl.editGeofence2(1, model);
+}
+```
+#### Remove the given geofence
+```java 
+public void test(AutomileClient cl){
+    cl.deleteGeofence2(1);
 }
 ```
 

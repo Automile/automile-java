@@ -10,13 +10,10 @@ import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExpenseReportModel {
-    Integer expenseReportId;
-    Integer contactId;
-    String contactName;
-    String contactImageUrl;
+public class GeofenceReportModel {
+    LocalDateTime fromDate;
+    LocalDateTime toDate;
     Integer vehicleId;
-    Integer tripId;
-    LocalDateTime expenseReportDateUtc;
-    List<ExpenseReportRowModel> expenseReportRows = Lists.newArrayList();
+    Integer geofenceId;
+    List<GeofenceRecordReportModel> result = Lists.newArrayList();
 }

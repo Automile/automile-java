@@ -18,6 +18,10 @@ import com.automile.model.Contact2CreateModel;
 import com.automile.model.Contact2DetailModel;
 import com.automile.model.Contact2EditModel;
 import com.automile.model.Contact2Model;
+import com.automile.model.Contact3CreateModel;
+import com.automile.model.Contact3DetailModel;
+import com.automile.model.Contact3EditModel;
+import com.automile.model.Contact3Model;
 import com.automile.model.ContactModel;
 import com.automile.model.ContactVehicleCreateModel;
 import com.automile.model.ContactVehicleDetailModel;
@@ -38,9 +42,13 @@ import com.automile.model.ExpenseReportRowCreateModel;
 import com.automile.model.ExpenseReportRowEditModel;
 import com.automile.model.ExpenseReportRowModel;
 import com.automile.model.FuelLevelInputModel;
+import com.automile.model.GeofenceCreate2Model;
 import com.automile.model.GeofenceCreateModel;
 import com.automile.model.GeofenceEditModel;
+import com.automile.model.GeofenceEditModel2;
 import com.automile.model.GeofenceModel;
+import com.automile.model.GeofenceModel2;
+import com.automile.model.GeofenceReportModel;
 import com.automile.model.IMEIConfigCreateModel;
 import com.automile.model.IMEIConfigDetailModel;
 import com.automile.model.IMEIConfigEditModel;
@@ -58,9 +66,12 @@ import com.automile.model.OrganizationNodeModel;
 import com.automile.model.PIDModel;
 import com.automile.model.Place2CreateModel;
 import com.automile.model.Place2EditModel;
+import com.automile.model.Place3CreateModel;
+import com.automile.model.Place3EditModel;
 import com.automile.model.PlaceCreateModel;
 import com.automile.model.PlaceEditModel;
 import com.automile.model.PlaceModel;
+import com.automile.model.PlaceModel3;
 import com.automile.model.PublishSubscribeCreateModel;
 import com.automile.model.PublishSubscribeEditModel;
 import com.automile.model.PublishSubscribeModel;
@@ -75,11 +86,15 @@ import com.automile.model.TaskMessageModel;
 import com.automile.model.TaskModel;
 import com.automile.model.TransportstyrelsenInfoModel;
 import com.automile.model.TriggerCreateModel;
+import com.automile.model.TriggerCreateModel2;
 import com.automile.model.TriggerDetailModel;
+import com.automile.model.TriggerDetailModel2;
 import com.automile.model.TriggerEditModel;
+import com.automile.model.TriggerEditModel2;
 import com.automile.model.TriggerEditMutedUntilModel;
 import com.automile.model.TriggerMessageHistoryModel;
 import com.automile.model.TriggerModel;
+import com.automile.model.TriggerModel2;
 import com.automile.model.TripAddNoteModel;
 import com.automile.model.TripConcatenation;
 import com.automile.model.TripDetailModel;
@@ -146,6 +161,8 @@ import static com.automile.AutomileConfig.EDIT_URL;
 import static com.automile.AutomileConfig.GET_BY_ID_URL;
 import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORIES_URL;
 import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORY_URL;
+import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORIES_URL;
+import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORY_URL;
 import static com.automile.AutomileConfig.IMEI_EVENTS_URL;
 import static com.automile.AutomileConfig.LIST_URL;
 import static com.automile.AutomileConfig.PUBLISH_SUBSCRIBE_TEST_URL;
@@ -427,7 +444,6 @@ public class AutomileClient {
      *
      * @return
      */
-    //TODO: response?
     public Contact2DetailModel getContact2MeImage() {
         return automileService.getCall(Contact2DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts2", "me/image"));
     }
@@ -438,7 +454,6 @@ public class AutomileClient {
      * @param data
      * @return
      */
-    //TODO: request?
     public void editContact2UploadImage(byte[] data) {
         automileService.postCall(data, null, format(EDIT_URL, "resourceowner", "contacts2/me", "uploadimage"));
     }
@@ -710,6 +725,16 @@ public class AutomileClient {
     }
 
     /**
+     * Removes the given expense report rows
+     *
+     * @param id expenseReportId
+     */
+    public void deleteExpenseReportRows(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner/expensereport", id, "expenseReportItems"));
+    }
+
+
+    /**
      * Carry out optical character recognization on image fragments and return the response
      *
      * @param model
@@ -946,7 +971,7 @@ public class AutomileClient {
     }
 
     /**
-     * Removes the given company
+     * Removes the given place
      *
      * @param id
      */
@@ -1134,6 +1159,19 @@ public class AutomileClient {
     }
 
     /**
+     * Get Geofence log
+     */
+    public GeofenceReportModel geofenceLogReport(Integer vehicleId, Integer geofenceId, LocalDateTime fromDate, LocalDateTime toDate) {
+        List<NameValuePair> params = Lists.newArrayList();
+        Optional.ofNullable(vehicleId).ifPresent(p -> automileService.addParam("vehicleId", vehicleId, params));
+        Optional.ofNullable(geofenceId).ifPresent(p -> automileService.addParam("geofenceId", geofenceId, params));
+        Optional.ofNullable(fromDate).ifPresent(p -> automileService.addParam("fromDate", fromDate, params));
+        Optional.ofNullable(toDate).ifPresent(p -> automileService.addParam("toDate", toDate, params));
+        return automileService.getCall(GeofenceReportModel.class, format(GET_BY_ID_URL, "resourceowner", "reports", "geofencelog"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
      * Create a task
      *
      * @param model
@@ -1279,6 +1317,23 @@ public class AutomileClient {
         automileService.putCall("", format(EDIT_URL, "resourceowner", "triggers/unmute", id));
     }
 
+    /**
+     * Move all users push triggers to userdevice
+     *
+     * @param model
+     */
+    public void editTriggerMovePush(MovePushTriggers model) {
+        automileService.postCall(model, null, format(CREATE_URL, "resourceowner", "triggers/movepush"));
+    }
+
+    /**
+     * Removes the given trigger
+     *
+     * @param id
+     */
+    public void deleteTrigger(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "triggers", id));
+    }
 
     /**
      * This get's the details of the current user that you are logged in as
@@ -1321,24 +1376,6 @@ public class AutomileClient {
      */
     public void editUserResetPassword(ResetPasswordUserModel model) {
         automileService.postCall(model, null, format(USER_ACTION_URL, "resetpassword"));
-    }
-
-    /**
-     * Move all users push triggers to userdevice
-     *
-     * @param model
-     */
-    public void editTriggerMovePush(MovePushTriggers model) {
-        automileService.postCall(model, null, format(CREATE_URL, "resourceowner", "triggers/movepush"));
-    }
-
-    /**
-     * Removes the given trigger
-     *
-     * @param id
-     */
-    public void deleteTrigger(int id) {
-        automileService.deleteCall(format(DELETE_URL, "resourceowner", "triggers", id));
     }
 
     /**
@@ -1774,9 +1811,9 @@ public class AutomileClient {
                                                               LocalDateTime fromDate, LocalDateTime toDate, boolean excludeArchived) {
         List<NameValuePair> params = Lists.newArrayList();
         Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("vehicleInspectionId", vehicleInspectionId, params));
-        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("vehicleId", vehicleId, params));
-        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("fromDate", fromDate, params));
-        Optional.ofNullable(vehicleInspectionId).ifPresent(p -> automileService.addParam("toDate", toDate, params));
+        Optional.ofNullable(vehicleId).ifPresent(p -> automileService.addParam("vehicleId", vehicleId, params));
+        Optional.ofNullable(fromDate).ifPresent(p -> automileService.addParam("fromDate", fromDate, params));
+        Optional.ofNullable(toDate).ifPresent(p -> automileService.addParam("toDate", toDate, params));
         automileService.addParam("excludeArchived", excludeArchived, params);
         return automileService.listCall(VehicleInspectionModel.class, format(LIST_URL, "resourceowner", "vehicleinspection"),
                 params.toArray(new NameValuePair[params.size()]));
@@ -1887,6 +1924,311 @@ public class AutomileClient {
      */
     public OrganizationNodeModel getOrganizationHierarchy() {
         return automileService.getCall(OrganizationNodeModel.class, format(GET_BY_ID_URL, "resourceowner", "organization", "hierarchy"));
+    }
+
+    /**
+     * Creates a new contact
+     *
+     * @param model
+     * @return
+     */
+    public Contact3Model createContact3(Contact3CreateModel model) {
+        return automileService.postCall(model, Contact3Model.class, format(CREATE_URL, "resourceowner", "contacts3"));
+    }
+
+    /**
+     * Get a list of all contacts that user is associated with
+     *
+     * @return
+     */
+    public List<Contact3Model> getContacts3() {
+        return automileService.listCall(Contact3Model.class, format(LIST_URL, "resourceowner", "contacts3"));
+    }
+
+    /**
+     * Get a contact by id
+     *
+     * @param id
+     * @return
+     */
+    public Contact3DetailModel getContact3(int id) {
+        return automileService.getCall(Contact3DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts3", id));
+    }
+
+    /**
+     * Updates the given contact id
+     *
+     * @param id
+     * @param model
+     */
+    public void editContact3(int id, Contact3EditModel model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "contacts3", id));
+    }
+
+    /**
+     * Removes the given contact
+     *
+     * @param id
+     */
+    public void deleteContact3(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "contacts3", id));
+    }
+
+    /**
+     * Get the contact representing myself
+     *
+     * @return
+     */
+    public Contact3DetailModel getContact3Me() {
+        return automileService.getCall(Contact3DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts3", "me"));
+    }
+
+    /**
+     * Get contact profile image
+     *
+     * @return
+     */
+    public Contact3DetailModel getContact3MeImage() {
+        return automileService.getCall(Contact3DetailModel.class, format(GET_BY_ID_URL, "resourceowner", "contacts3", "me/image"));
+    }
+
+    /**
+     * Upload contact profile image
+     *
+     * @param data
+     * @return
+     */
+    public void editContact3UploadImage(byte[] data) {
+        automileService.postCall(data, null, format(EDIT_URL, "resourceowner", "contacts3/me", "uploadimage"));
+    }
+
+    /**
+     * Removes the users profile image
+     *
+     * @return
+     */
+    public void editContact3RemoveImage() {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts3/me", "removeimage"));
+    }
+
+    /**
+     * Updates the default vehicle
+     *
+     * @param vehicleId
+     * @return
+     */
+    public void editContact3MeUpdateDefaultVehicle(int vehicleId) {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts3/me/updatedefaultvehicle", vehicleId));
+    }
+
+    /**
+     * Updates the default vehicle
+     *
+     * @param vehicleId
+     * @return
+     */
+    public void editContact3UpdateDefaultVehicle(int vehicleId) {
+        automileService.putCall(null, format(EDIT_URL, "resourceowner", "contacts3", "updatedefaultvehicle", vehicleId));
+    }
+
+    /**
+     * Add and remove custom categories
+     *
+     * @param model
+     * @return
+     */
+    public void editContact3CustomCategories(CustomCategoryPostModel model) {
+        automileService.postCall(model, null, format(CREATE_URL, "resourceowner", "contacts3/customcategory"));
+    }
+
+    /**
+     * Get a custom category
+     *
+     * @return
+     */
+    public CustomCategoryModel getContacts3CustomCategory(int contactId, int customCategoryId) {
+        return automileService.getCall(CustomCategoryModel.class, format(GET_CONTACT3_CUSTOM_CATEGORY_URL, contactId, customCategoryId));
+    }
+
+    /**
+     * Get a all custom categories
+     *
+     * @return
+     */
+    public List<CustomCategoryModel> getContacts3CustomCategories(int contactId) {
+        return automileService.listCall(CustomCategoryModel.class, format(GET_CONTACT3_CUSTOM_CATEGORIES_URL, contactId));
+    }
+
+    /**
+     * Creates a new geofence
+     *
+     * @param model
+     * @return
+     */
+    public GeofenceModel2 createGeofence2(GeofenceCreate2Model model) {
+        return automileService.postCall(model, GeofenceModel2.class, format(CREATE_URL, "resourceowner", "geofence2"));
+    }
+
+    /**
+     * Get a list of geofences user is associated with
+     *
+     * @return
+     */
+    public List<GeofenceModel2> getGeofences2() {
+        return automileService.listCall(GeofenceModel2.class, format(LIST_URL, "resourceowner", "geofence2"));
+    }
+
+    /**
+     * Get geofence by id
+     *
+     * @param id
+     * @return
+     */
+    public GeofenceModel getGeofence2(int id) {
+        return automileService.getCall(GeofenceModel.class, format(GET_BY_ID_URL, "resourceowner", "geofence2", id));
+    }
+
+    /**
+     * Updates the given geofence with new model
+     *
+     * @param id
+     * @param model
+     */
+    public void editGeofence2(int id, GeofenceEditModel2 model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "geofence2", id));
+    }
+
+    /**
+     * Removes the given geofence
+     *
+     * @param id
+     */
+    public void deleteGeofence2(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "geofence2", id));
+    }
+
+    /**
+     * Creates a new place for organization
+     *
+     * @param model
+     * @return
+     */
+    public PlaceModel3 createPlace2(Place3CreateModel model) {
+        return automileService.postCall(model, PlaceModel3.class, format(CREATE_URL, "resourceowner", "place3"));
+    }
+
+    /**
+     * Gets all places for organization
+     *
+     * @return
+     */
+    public List<PlaceModel3> getPlaces3() {
+        return automileService.listCall(PlaceModel3.class, format(LIST_URL, "resourceowner", "place3"));
+    }
+
+    /**
+     * Gets place by placeid
+     *
+     * @param id
+     * @return
+     */
+    public PlaceModel3 getPlace3(int id) {
+        return automileService.getCall(PlaceModel3.class, format(GET_BY_ID_URL, "resourceowner", "place3", id));
+    }
+
+    /**
+     * Updates the given place with new model
+     *
+     * @param id
+     * @param model
+     */
+    public void editPlace3(int id, Place3EditModel model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "place3", id));
+    }
+
+    /**
+     * Removes the given place
+     *
+     * @param id
+     */
+    public void deletePlace3(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "place3", id));
+    }
+
+    /**
+     * Creates a new trigger
+     *
+     * @param model
+     * @return
+     */
+    public TriggerDetailModel2 createTrigger2(TriggerCreateModel2 model) {
+        return automileService.postCall(model, TriggerDetailModel2.class, format(CREATE_URL, "resourceowner", "triggers2"));
+    }
+
+    /**
+     * Get all triggers
+     *
+     * @return
+     */
+    public List<TriggerModel2> getTriggers2() {
+        return automileService.listCall(TriggerModel2.class, format(LIST_URL, "resourceowner", "triggers2"));
+    }
+
+    /**
+     * Get a trigger by id
+     *
+     * @param id
+     * @return
+     */
+    public TriggerDetailModel2 getTrigger2(int id) {
+        return automileService.getCall(TriggerDetailModel2.class, format(GET_BY_ID_URL, "resourceowner", "triggers2", id));
+    }
+
+    /**
+     * Updates the given trigger id
+     *
+     * @param id
+     * @param model
+     */
+    public void editTrigger2(int id, TriggerEditModel2 model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "triggers2", id));
+    }
+
+    /**
+     * Mute the given trigger id
+     *
+     * @param id
+     * @param model
+     */
+    public void editTrigger2Mute(int id, TriggerEditMutedUntilModel model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "triggers2/mute", id));
+    }
+
+    /**
+     * Unmute the given trigger id
+     *
+     * @param id
+     */
+    public void editTrigger2Unmute(int id) {
+        automileService.putCall("", format(EDIT_URL, "resourceowner", "triggers2/unmute", id));
+    }
+
+    /**
+     * Move all users push triggers to userdevice
+     *
+     * @param model
+     */
+    public void editTrigger2MovePush(MovePushTriggers model) {
+        automileService.postCall(model, null, format(CREATE_URL, "resourceowner", "triggers2/movepush"));
+    }
+
+    /**
+     * Removes the given trigger
+     *
+     * @param id
+     */
+    public void deleteTrigger2(int id) {
+        automileService.deleteCall(format(DELETE_URL, "resourceowner", "triggers2", id));
     }
 
 }
