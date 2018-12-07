@@ -161,11 +161,19 @@ public class AutomileClientTests {
     }
 
     @Test
-    public void testTrackers2List() throws IOException {
+    public void testTrackedAssetList() throws IOException {
         mockAuthorized();
         mockContent("ResourceOwnerTrackedAsset/list.json");
         List<TrackedAssetModelGET> trackers = ac.getTrackers();
         assertEquals(5, trackers.size());
+    }
+
+    @Test
+    public void testTrackedAssetGetById() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/getById.json");
+        TrackedAssetModelGET tracker = ac.getTracker(95898);
+        assertEquals("Tracker - HAMID", tracker.getName());
     }
 
     private void mockAuthorized() {

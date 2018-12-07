@@ -1118,6 +1118,16 @@ public class AutomileClient {
     }
 
     /**
+     * Get an asset tracker by id
+     *
+     * @param id
+     * @return
+     */
+    public TrackedAssetModelGET getTracker(int id) {
+        return automileService.getCall(TrackedAssetModelGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", id));
+    }
+
+    /**
      * Get all trigger messages that the logged in user has access to
      *
      * @return
