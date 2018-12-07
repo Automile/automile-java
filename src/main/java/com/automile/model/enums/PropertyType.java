@@ -7,6 +7,7 @@ public enum PropertyType {
     STATUS(1),
     SLEEP_UNTIL(2),
     TEMPERATURE(3),
+    PROPERTY_TYPE4(4),
     TRACK_UNTIL(5),
     TRIP_ID(6),
     VEHICLE_ID(7),

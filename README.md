@@ -11,7 +11,7 @@ The latest OpenAPI (fka Swagger) specification may be found at: https://api.auto
 
 :yum:
 
-**This library allows you to quickly and easily use the Automile API via PHP.**
+**This library allows you to quickly and easily use the Automile API via Java.**
 
 **This SDK is currently in beta. If you need help:**
 
@@ -32,7 +32,7 @@ gradlew install
 
 Add installed dependency to your project via Gradle
 ```
-compile('com.automile:client:1.0.1')
+compile('com.automile:client:1.0.2')
 
 ```
 Add installed dependency to your project via Maven
@@ -40,7 +40,7 @@ Add installed dependency to your project via Maven
 <dependency>
     <groupId>com.automile</groupId>
     <artifactId>client</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 

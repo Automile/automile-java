@@ -91,6 +91,13 @@ public class AutomileService {
         return executeAndConvert(clazz, request);
     }
 
+    public void putCall(String url, NameValuePair... params) {
+        validateToken();
+        HttpUriRequest request = RequestBuilder.put(url)
+                .addHeader(getOauthHeader()).addParameters(params).build();
+        executeAndConvert(null, request);
+    }
+
     public void putCall(Object model, String url, NameValuePair... params) {
         validateToken();
         HttpUriRequest request = RequestBuilder.put(url)
