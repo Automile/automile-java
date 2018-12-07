@@ -3,9 +3,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum Command {
-    COMMAND_1(1),
-    COMMAND_2(2),
-    COMMAND_3(3);
+    SHUTDOWN(1),
+    TRACK(2),
+    SLEEP(3);
 
     private Integer value;
 

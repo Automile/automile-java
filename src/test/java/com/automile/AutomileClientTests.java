@@ -176,6 +176,14 @@ public class AutomileClientTests {
         assertEquals("Tracker - HAMID", tracker.getName());
     }
 
+    @Test
+    public void testTrackedAssetEnumList() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/enum.json");
+        List<EnumTypeModelGET> enums = ac.getTrackerEnums();
+        assertEquals(5, enums.size());
+    }
+
     private void mockAuthorized() {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setAccessToken("123");

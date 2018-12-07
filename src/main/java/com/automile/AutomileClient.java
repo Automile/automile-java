@@ -1127,6 +1127,18 @@ public class AutomileClient {
         return automileService.getCall(TrackedAssetModelGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", id));
     }
 
+
+
+
+    /**
+     * Get asset tracker enum description
+     *
+     * @return
+     */
+    public List<EnumTypeModelGET> getTrackerEnums() {
+        return automileService.listCall(EnumTypeModelGET.class, format(LIST_URL, "resourceowner", "trackedasset/enum"));
+    }
+
     /**
      * Get all trigger messages that the logged in user has access to
      *

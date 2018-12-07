@@ -3,19 +3,18 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum PropertyType {
-    PROPERTY_0(0),
-    PROPERTY_1(1),
-    PROPERTY_2(2),
-    PROPERTY_3(3),
-    PROPERTY_4(4),
-    PROPERTY_5(5),
-    PROPERTY_6(6),
-    PROPERTY_7(7),
-    PROPERTY_8(8),
-    PROPERTY_9(9),
-    PROPERTY_10(10),
-    PROPERTY_11(11),
-    PROPERTY_12(12);
+    BATTER_YLEVEL(0),
+    STATUS(1),
+    SLEEP_UNTIL(2),
+    TEMPERATURE(3),
+    TRACK_UNTIL(5),
+    TRIP_ID(6),
+    VEHICLE_ID(7),
+    LAST_TRIP_ID(8),
+    HAS_EXTERNAL_POWER(9),
+    EXTERNAL_POWER(10),
+    OPERATING_TIME(11),
+    CONTACT_ID(12);
 
     private Integer value;
 
