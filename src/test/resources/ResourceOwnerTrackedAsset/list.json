@@ -1,0 +1,295 @@
+[
+  {
+    "TrackedAssetId": 95899,
+    "IMEIDeviceType": 2,
+    "IMEI": "352953080037785",
+    "IMEIConfigId": 80516,
+    "Status": 1,
+    "LastLocation": {
+      "Longitude": 10.732500076293945,
+      "Latitude": 59.92805480957031
+    },
+    "LastLocationTimestamp": "2018-09-19T20:47:19.000Z",
+    "LastContact": "2018-09-19T21:18:35.837Z",
+    "NumberOfUnreadNotifications": 0,
+    "PropertyList": [
+      {
+        "PropertyType": 8,
+        "PropertyName": "LastTripId",
+        "ValueType": "Int32",
+        "Value": "123298562",
+        "Unit": null
+      },
+      {
+        "PropertyType": 0,
+        "PropertyName": "BatteryLevel",
+        "ValueType": "Int16",
+        "Value": "65",
+        "Unit": "%"
+      },
+      {
+        "PropertyType": 1,
+        "PropertyName": "Status",
+        "ValueType": "AnyTrackStatusType",
+        "Value": "4",
+        "Unit": null
+      },
+      {
+        "PropertyType": 3,
+        "PropertyName": "Temperature",
+        "ValueType": "Decimal",
+        "Value": "24",
+        "Unit": "C"
+      },
+      {
+        "PropertyType": 9,
+        "PropertyName": "HasExternalPower",
+        "ValueType": "Boolean",
+        "Value": "false",
+        "Unit": null
+      }
+    ],
+    "AvailableCommandList": [
+      {
+        "Command": 1,
+        "Endpoint": "https://api.automile.com/v1/resourceowner/trackedasset/95899/shutdown",
+        "AvailableUntil": "2018-09-20T22:18:35.837Z"
+      }
+    ],
+    "Name": "Flyttbart gods",
+    "ImageUrl": "https://api.automile.com/v1/resourceowner/content/download/2bfc5b18-5ee3-4a8f-9057-21a52ebbef15",
+    "DefaultSleepTimeInMinutes": 60,
+    "AssetType": 0
+  },
+  {
+    "TrackedAssetId": 99365,
+    "IMEIDeviceType": 2,
+    "IMEI": "352953080120367",
+    "IMEIConfigId": 83055,
+    "Status": 0,
+    "LastLocation": {
+      "Longitude": 10.758610725402832,
+      "Latitude": 59.90833282470703
+    },
+    "LastLocationTimestamp": "2018-12-06T06:55:03.000Z",
+    "LastContact": "2018-12-07T13:11:22.531Z",
+    "NumberOfUnreadNotifications": 6,
+    "PropertyList": [
+      {
+        "PropertyType": 8,
+        "PropertyName": "LastTripId",
+        "ValueType": "Int32",
+        "Value": "141386024",
+        "Unit": null
+      },
+      {
+        "PropertyType": 0,
+        "PropertyName": "BatteryLevel",
+        "ValueType": "Int16",
+        "Value": "73",
+        "Unit": "%"
+      },
+      {
+        "PropertyType": 1,
+        "PropertyName": "Status",
+        "ValueType": "AnyTrackStatusType",
+        "Value": "0",
+        "Unit": null
+      },
+      {
+        "PropertyType": 3,
+        "PropertyName": "Temperature",
+        "ValueType": "Decimal",
+        "Value": "22",
+        "Unit": "C"
+      },
+      {
+        "PropertyType": 9,
+        "PropertyName": "HasExternalPower",
+        "ValueType": "Boolean",
+        "Value": "false",
+        "Unit": null
+      },
+      {
+        "PropertyType": 10,
+        "PropertyName": "ExternalPower",
+        "ValueType": "Double",
+        "Value": "12.095",
+        "Unit": "V"
+      }
+    ],
+    "AvailableCommandList": [],
+    "Name": "Leonard's Tracker",
+    "ImageUrl": "https://api.automile.com/v1/resourceowner/content/download/a52c20dc-e0fa-49b4-a548-eaf804984198",
+    "DefaultSleepTimeInMinutes": 0,
+    "AssetType": 0
+  },
+  {
+    "TrackedAssetId": 95986,
+    "IMEIDeviceType": 2,
+    "IMEI": "352953080043379",
+    "IMEIConfigId": 80562,
+    "Status": 0,
+    "LastLocation": {
+      "Longitude": 10.65583324432373,
+      "Latitude": 59.93166732788086
+    },
+    "LastLocationTimestamp": "2018-10-06T20:47:55.000Z",
+    "LastContact": "2018-12-07T03:16:18.590Z",
+    "NumberOfUnreadNotifications": 3,
+    "PropertyList": [
+      {
+        "PropertyType": 8,
+        "PropertyName": "LastTripId",
+        "ValueType": "Int32",
+        "Value": "127291117",
+        "Unit": null
+      },
+      {
+        "PropertyType": 0,
+        "PropertyName": "BatteryLevel",
+        "ValueType": "Int16",
+        "Value": "56",
+        "Unit": "%"
+      },
+      {
+        "PropertyType": 1,
+        "PropertyName": "Status",
+        "ValueType": "AnyTrackStatusType",
+        "Value": "0",
+        "Unit": null
+      },
+      {
+        "PropertyType": 3,
+        "PropertyName": "Temperature",
+        "ValueType": "Decimal",
+        "Value": "19",
+        "Unit": "C"
+      },
+      {
+        "PropertyType": 9,
+        "PropertyName": "HasExternalPower",
+        "ValueType": "Boolean",
+        "Value": "false",
+        "Unit": null
+      }
+    ],
+    "AvailableCommandList": [],
+    "Name": "Martin - Jolla til far",
+    "ImageUrl": "https://api.automile.com/v1/resourceowner/content/download/2928d23a-b61b-43f0-b8e5-b0c7f1e9be96",
+    "DefaultSleepTimeInMinutes": 0,
+    "AssetType": 5
+  },
+  {
+    "TrackedAssetId": 95900,
+    "IMEIDeviceType": 2,
+    "IMEI": "352953080159415",
+    "IMEIConfigId": 80517,
+    "Status": 0,
+    "LastLocation": {
+      "Longitude": 10.727222442626953,
+      "Latitude": 59.72027587890625
+    },
+    "LastLocationTimestamp": "2018-12-07T09:42:56.198Z",
+    "LastContact": "2018-12-07T09:42:56.198Z",
+    "NumberOfUnreadNotifications": 2,
+    "PropertyList": [
+      {
+        "PropertyType": 8,
+        "PropertyName": "LastTripId",
+        "ValueType": "Int32",
+        "Value": "127317064",
+        "Unit": null
+      },
+      {
+        "PropertyType": 0,
+        "PropertyName": "BatteryLevel",
+        "ValueType": "Int16",
+        "Value": "2",
+        "Unit": "%"
+      },
+      {
+        "PropertyType": 1,
+        "PropertyName": "Status",
+        "ValueType": "AnyTrackStatusType",
+        "Value": "0",
+        "Unit": null
+      },
+      {
+        "PropertyType": 3,
+        "PropertyName": "Temperature",
+        "ValueType": "Decimal",
+        "Value": "0",
+        "Unit": "C"
+      },
+      {
+        "PropertyType": 9,
+        "PropertyName": "HasExternalPower",
+        "ValueType": "Boolean",
+        "Value": "false",
+        "Unit": null
+      }
+    ],
+    "AvailableCommandList": [],
+    "Name": "Nidelv 24 - Skjærgårdsbåt",
+    "ImageUrl": "https://api.automile.com/v1/resourceowner/content/download/a890ddb9-09df-4799-917b-41abcdec4d39",
+    "DefaultSleepTimeInMinutes": 960,
+    "AssetType": 3
+  },
+  {
+    "TrackedAssetId": 95898,
+    "IMEIDeviceType": 2,
+    "IMEI": "352953080163557",
+    "IMEIConfigId": 80515,
+    "Status": 0,
+    "LastLocation": {
+      "Longitude": 10.792222023010254,
+      "Latitude": 59.91666793823242
+    },
+    "LastLocationTimestamp": "2018-08-28T16:44:43.000Z",
+    "LastContact": "2018-12-07T03:41:50.725Z",
+    "NumberOfUnreadNotifications": 7,
+    "PropertyList": [
+      {
+        "PropertyType": 8,
+        "PropertyName": "LastTripId",
+        "ValueType": "Int32",
+        "Value": "118070318",
+        "Unit": null
+      },
+      {
+        "PropertyType": 0,
+        "PropertyName": "BatteryLevel",
+        "ValueType": "Int16",
+        "Value": "8",
+        "Unit": "%"
+      },
+      {
+        "PropertyType": 1,
+        "PropertyName": "Status",
+        "ValueType": "AnyTrackStatusType",
+        "Value": "0",
+        "Unit": null
+      },
+      {
+        "PropertyType": 3,
+        "PropertyName": "Temperature",
+        "ValueType": "Decimal",
+        "Value": "24",
+        "Unit": "C"
+      },
+      {
+        "PropertyType": 9,
+        "PropertyName": "HasExternalPower",
+        "ValueType": "Boolean",
+        "Value": "false",
+        "Unit": null
+      }
+    ],
+    "AvailableCommandList": [],
+    "Name": "Tracker - HAMID",
+    "ImageUrl": "https://api.automile.com/v1/resourceowner/content/download/e3f6ebea-1a98-46a9-92ac-e4329b423c19",
+    "DefaultSleepTimeInMinutes": 60,
+    "AssetType": 0
+  }
+]

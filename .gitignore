@@ -2,3 +2,5 @@
 /classes/
 /.idea/
 /.gradle/
+/out/
+automile-java.iml

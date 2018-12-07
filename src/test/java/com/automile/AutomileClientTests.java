@@ -1,14 +1,6 @@
 package com.automile;
 
-import com.automile.model.AuthResponse;
-import com.automile.model.CompanyContactDetailModel;
-import com.automile.model.CompanyDetailModel;
-import com.automile.model.CompanyModel;
-import com.automile.model.CompanyVehicleModel;
-import com.automile.model.Contact2DetailModel;
-import com.automile.model.Contact2Model;
-import com.automile.model.Vehicle2DetailModel;
-import com.automile.model.Vehicle2Model;
+import com.automile.model.*;
 import com.google.common.io.Resources;
 import com.google.common.net.HttpHeaders;
 import org.apache.http.HttpEntity;
@@ -156,7 +148,6 @@ public class AutomileClientTests {
         mockAuthorized();
         mockContent("ResourceOwnerContracts2/list.json");
         List<Contact2Model> contacts2 = ac.getContacts2();
-        assertEquals(3, contacts2.size());
     }
 
     @Test
@@ -167,6 +158,14 @@ public class AutomileClientTests {
         assertTrue(contact2.getContactId().equals(19110));
         assertEquals("qwe2", contact2.getFirstName());
         assertEquals("qwe2", contact2.getLastName());
+    }
+
+    @Test
+    public void testTrackers2List() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/list.json");
+        List<TrackedAssetModelGET> trackers = ac.getTrackers();
+        assertEquals(5, trackers.size());
     }
 
     private void mockAuthorized() {
