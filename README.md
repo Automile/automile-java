@@ -11,7 +11,7 @@ The latest OpenAPI (fka Swagger) specification may be found at: https://api.auto
 
 :yum:
 
-**This library allows you to quickly and easily use the Automile API via PHP.**
+**This library allows you to quickly and easily use the Automile API via Java.**
 
 **This SDK is currently in beta. If you need help:**
 
@@ -32,7 +32,7 @@ gradlew install
 
 Add installed dependency to your project via Gradle
 ```
-compile('com.automile:client:1.0.1')
+compile('com.automile:client:1.0.2')
 
 ```
 Add installed dependency to your project via Maven
@@ -40,7 +40,7 @@ Add installed dependency to your project via Maven
 <dependency>
     <groupId>com.automile</groupId>
     <artifactId>client</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -112,6 +112,7 @@ and we'll get to it as soon as possible.
 * [Vehicle Inspection](#vehicle-inspection-methods)
 * [Vehicle Place](#vehicle-place-methods)
 * [Organization](#organization-methods)
+* [Asset Tracker](#asset-tracker-methods)
 
 ### Company Methods
 
@@ -1447,7 +1448,7 @@ public void test(AutomileClient cl){
 }
 ```
 
-## Organization Methods
+### Organization Methods
 
 #### Get a the details of the organization the user is assoicates with
 ```java 
@@ -1467,5 +1468,86 @@ public void test(AutomileClient cl){
 ```java 
 public void test(AutomileClient cl){
     cl.getOrganizationHierarchy();
+}
+```
+
+### Asset Tracker Methods
+
+#### Get all trackers
+```java
+public void test(AutomileClient cl){
+    cl.getTrackers();
+}
+```
+
+#### Get all trackers by asset type
+_All types = null, Vehicle = 0, Trailer = 1, ATV = 2, Boat = 3, Excavator = 4, Cargo = 5_
+```java
+public void test(AutomileClient cl){
+    cl.getTrackers(0);
+}
+```
+
+#### Get tracker by tracker id
+```java
+public void test(AutomileClient cl) {
+    cl.getTracker(95898);
+}
+```
+
+#### Update a tracker by id
+```java
+public void test(AutomileClient cl) {
+    TrackedAssetModelPUT model = new TrackedAssetModelPUT();
+    model.setName("Tracker");
+    model.setImageUrl("Image url");
+    model.setAssetType(AssetType.VEHICLE);
+    model.setDefaultSleepTypeInMinutes(60);
+
+    cl1.editTrackedAsset(95898, model);
+}
+```
+
+#### Put a tracker to sleep by id
+```java
+public void test(AutomileClient cl) {
+    TrackedAssetSleepConfigurationModelPUT model = new TrackedAssetSleepConfigurationModelPUT();
+    model.setMinutesToSleep(60);
+    
+    cl1.sleepTrackedAsset(95898, model);
+}
+```
+
+#### Start tracking by id
+```java
+public void test(AutomileClient cl) {
+    TrackedAssetTrackConfigurationModelPUT model = new TrackedAssetTrackConfigurationModelPUT();
+    model.setMinutesToTrack(60);
+    
+    cl1.trackTrackedAsset(95898, model);
+}
+```
+
+#### Shutdown an asset tracker
+```java
+public void test(AutomileClient cl) {
+    cl.shutdownTrackedAsset(95898);
+}
+```
+
+#### Get history of asset tracker by id
+```java
+public void test(AutomileClient cl) {
+    cl.getTrackerHistory(95898);
+}
+```
+
+#### Get history of asset tracker by id, filter by last number of days & history type
+_lastNumberOfDays - Last number of days to get trips for (default = 60)_
+
+_historyType - (default = all types) null = All types, 1 = Move Alert, 2 = Temperature, 4 = Battery Alert, 8 = Heartbeat, 16 = Battery Level, 32 = External Power Voltage, 64 = Operating Time, 128 = Shutdown Pending, 256 = Shutdown, 512 = Offline_
+```java
+public void test(AutomileClient cl) {
+    cl.getTrackerHistory(95898, 60, 4);
 }
 ```

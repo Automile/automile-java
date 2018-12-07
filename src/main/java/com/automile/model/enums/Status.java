@@ -3,12 +3,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum Status {
-    STATUS_0(0),
-    STATUS_1(1),
-    STATUS_2(2),
-    STATUS_3(3),
-    STATUS_4(4),
-    STATUS_5(5);
+    STANDBY(0),
+    OFFLINE(1),
+    TRACKING(2),
+    SLEEPING(3),
+    SHUTDOWN_PENDING(4),
+    SHUTDOWN(5);
 
     private Integer value;
 

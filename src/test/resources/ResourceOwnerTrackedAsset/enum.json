@@ -1,0 +1,69 @@
+[
+  {
+    "MemberName": "Command",
+    "EnumType": "ApiTrackedAssetCommandType",
+    "EnumValueList": {
+      "Shutdown": 1,
+      "Track": 2,
+      "Sleep": 3
+    }
+  },
+  {
+    "MemberName": "PropertyType",
+    "EnumType": "PropertyType",
+    "EnumValueList": {
+      "BatteryLevel": 0,
+      "Status": 1,
+      "SleepUntil": 2,
+      "Temperature": 3,
+      "TrackUntil": 5,
+      "TripId": 6,
+      "VehicleId": 7,
+      "LastTripId": 8,
+      "HasExternalPower": 9,
+      "ExternalPower": 10,
+      "OperatingTime": 11,
+      "ContactId": 12
+    }
+  },
+  {
+    "MemberName": "HistoryType",
+    "EnumType": "ApiAssetHistoryType",
+    "EnumValueList": {
+      "MoveAlert": 0,
+      "Temperature": 1,
+      "BatteryAlert": 2,
+      "Heartbeat": 3,
+      "BatteryLevel": 4,
+      "ExternalPowerVoltage": 5,
+      "OperatingTime": 6,
+      "ShutdownPending": 7,
+      "Shutdown": 8,
+      "Offline": 9
+    }
+  },
+  {
+    "MemberName": "IMEIDeviceType",
+    "EnumType": "ApiIMEIDeviceType",
+    "EnumValueList": {
+      "AutomileBox_750": 0,
+      "AutomileBox_860": 1,
+      "AutomileAnyTrack_1": 2,
+      "AutomileMobile": 3,
+      "Teltonika": 4,
+      "Unknown": 255
+    }
+  },
+  {
+    "MemberName": "Status",
+    "EnumType": "ApiTrackedAssetStatusType",
+    "EnumValueList": {
+      "Standby": 0,
+      "Offline": 1,
+      "Tracking": 2,
+      "Sleeping": 3,
+      "ShutdownPending": 4,
+      "Shutdown": 5
+    }
+  }
+]

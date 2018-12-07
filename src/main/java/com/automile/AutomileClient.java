@@ -23,25 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.automile.AutomileConfig.CREATE_URL;
-import static com.automile.AutomileConfig.DELETE_URL;
-import static com.automile.AutomileConfig.EDIT_URL;
-import static com.automile.AutomileConfig.GET_BY_ID_URL;
-import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORIES_URL;
-import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORY_URL;
-import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORIES_URL;
-import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORY_URL;
-import static com.automile.AutomileConfig.IMEI_EVENTS_URL;
-import static com.automile.AutomileConfig.LIST_URL;
-import static com.automile.AutomileConfig.PUBLISH_SUBSCRIBE_TEST_URL;
-import static com.automile.AutomileConfig.TRIPS_GET_PID_URL;
-import static com.automile.AutomileConfig.TRIPS_GET_URL;
-import static com.automile.AutomileConfig.USER_ACTION_URL;
-import static com.automile.AutomileConfig.USER_URL;
-import static com.automile.AutomileConfig.VEHICLES2_ACTION_URL;
-import static com.automile.AutomileConfig.VEHICLE_HEALTH_GET_OVER_PERIOD_URL;
-import static com.automile.AutomileConfig.getHttpClient;
-import static com.automile.AutomileConfig.getMapper;
+import static com.automile.AutomileConfig.*;
 import static java.lang.String.format;
 
 @Slf4j
@@ -1114,7 +1096,113 @@ public class AutomileClient {
      * @return
      */
     public List<TrackedAssetModelGET> getTrackers() {
-        return automileService.listCall(TrackedAssetModelGET.class, format(LIST_URL, "resourceowner", "trackedasset"));
+        return getTrackers(null);
+    }
+
+    /**
+     * Get all asset trackers that the user have access to, filter by asset type
+     *
+     * @param filterAssetType
+     * @return
+     */
+    public List<TrackedAssetModelGET> getTrackers(Integer filterAssetType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("filterAssetType", filterAssetType, params);
+        return automileService.listCall(TrackedAssetModelGET.class, format(LIST_URL, "resourceowner", "trackedasset"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get an asset tracker by id
+     *
+     * @param id
+     * @return
+     */
+    public TrackedAssetModelGET getTracker(int id) {
+        return automileService.getCall(TrackedAssetModelGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", id));
+    }
+
+    /**
+     * Update an asset tracker
+     *
+     * @param id
+     * @param model
+     */
+    public void editTrackedAsset(Integer id, TrackedAssetModelPUT model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "trackedasset", id));
+    }
+
+    /**
+     * Put a tracked asset to sleep
+     *
+     * @param id
+     * @param model
+     */
+    public void sleepTrackedAsset(Integer id, TrackedAssetSleepConfigurationModelPUT model) {
+        automileService.putCall(model, format(TRACKED_ASSET_URL, id, "sleep"));
+    }
+
+    /**
+     * Start tracking an asset
+     *
+     * @param id
+     * @param model
+     */
+    public void trackTrackedAsset(Integer id, TrackedAssetTrackConfigurationModelPUT model) {
+        automileService.putCall(model, format(TRACKED_ASSET_URL, id, "track"));
+    }
+
+    /**
+     * Shutdown an asset tracker
+     *
+     * @param id
+     */
+    public void shutdownTrackedAsset(Integer id) {
+        automileService.putCall(format(TRACKED_ASSET_URL, id, "track"));
+    }
+
+    /**
+     * Get a list of asset tracker history
+     *
+     * @param id
+     * @return
+     */
+    public List<TrackedAssetHistoryModelGET> getTrackerHistory(Integer id) {
+        return getTrackerHistory(id, null, null);
+    }
+
+    /**
+     * Get a list of asset tracker history, filter by number of days and history type
+     *
+     * @param id
+     * @param lastNumberOfDays
+     * @param historyType
+     * @return
+     */
+    public List<TrackedAssetHistoryModelGET> getTrackerHistory(Integer id, Integer lastNumberOfDays, Integer historyType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        Optional.ofNullable(lastNumberOfDays).ifPresent(p -> automileService.addParam("lastNumberOfDays", lastNumberOfDays, params));
+        Optional.ofNullable(historyType).ifPresent(p -> automileService.addParam("historyType", historyType, params));
+        return automileService.listCall(TrackedAssetHistoryModelGET.class, format(TRACKED_ASSET_URL, id, "history"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get asset tracker sleep intervals
+     *
+     * @return
+     */
+    public TrackedAssetSleepIntervalGET getTrackerSleepIntervals() {
+        return automileService.getCall(TrackedAssetSleepIntervalGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", "sleepinterval"));
+    }
+
+    /**
+     * Get list of asset tracker enum description
+     *
+     * @return
+     */
+    public List<EnumTypeModelGET> getTrackerEnums() {
+        return automileService.listCall(EnumTypeModelGET.class, format(LIST_URL, "resourceowner", "trackedasset/enum"));
     }
 
     /**

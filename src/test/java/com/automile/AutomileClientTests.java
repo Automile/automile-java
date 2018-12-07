@@ -161,11 +161,34 @@ public class AutomileClientTests {
     }
 
     @Test
-    public void testTrackers2List() throws IOException {
+    public void testTrackedAssetList() throws IOException {
         mockAuthorized();
         mockContent("ResourceOwnerTrackedAsset/list.json");
         List<TrackedAssetModelGET> trackers = ac.getTrackers();
         assertEquals(5, trackers.size());
+    }
+
+    @Test
+    public void testTrackedAssetGetById() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/getById.json");
+        TrackedAssetModelGET tracker = ac.getTracker(95898);
+        assertEquals("Tracker - HAMID", tracker.getName());
+    }
+
+    @Test
+    public void testTrackedAssetEnumList() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/enum.json");
+        List<EnumTypeModelGET> enums = ac.getTrackerEnums();
+        assertEquals(5, enums.size());
+    }
+
+    @Test
+    public void testTrackedAssetSleepInterval() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/sleepinterval.json");
+        TrackedAssetSleepIntervalGET sleep = ac.getTrackerSleepIntervals();
     }
 
     private void mockAuthorized() {
