@@ -1,138 +1,6 @@
 package com.automile;
 
-import com.automile.model.AmbientAirTemperatureModel;
-import com.automile.model.AuthResponse;
-import com.automile.model.ChangePasswordModel;
-import com.automile.model.ChangeUserNameModel;
-import com.automile.model.CompanyContactCreateModel;
-import com.automile.model.CompanyContactDetailModel;
-import com.automile.model.CompanyContactEditModel;
-import com.automile.model.CompanyCreateModel;
-import com.automile.model.CompanyDetailModel;
-import com.automile.model.CompanyEditModel;
-import com.automile.model.CompanyModel;
-import com.automile.model.CompanyVehicleCreateModel;
-import com.automile.model.CompanyVehicleEditModel;
-import com.automile.model.CompanyVehicleModel;
-import com.automile.model.Contact2CreateModel;
-import com.automile.model.Contact2DetailModel;
-import com.automile.model.Contact2EditModel;
-import com.automile.model.Contact2Model;
-import com.automile.model.Contact3CreateModel;
-import com.automile.model.Contact3DetailModel;
-import com.automile.model.Contact3EditModel;
-import com.automile.model.Contact3Model;
-import com.automile.model.ContactModel;
-import com.automile.model.ContactVehicleCreateModel;
-import com.automile.model.ContactVehicleDetailModel;
-import com.automile.model.ContactVehicleEditModel;
-import com.automile.model.CustomCategoryModel;
-import com.automile.model.CustomCategoryPostModel;
-import com.automile.model.EmailExpenseReportModel;
-import com.automile.model.EmailExpenseReportsModel;
-import com.automile.model.EmailTripReportModel;
-import com.automile.model.EngineCoolantTemperatureModel;
-import com.automile.model.ExpenseReportCreateModel;
-import com.automile.model.ExpenseReportEditModel;
-import com.automile.model.ExpenseReportModel;
-import com.automile.model.ExpenseReportRowContentCreateModel;
-import com.automile.model.ExpenseReportRowContentEditModel;
-import com.automile.model.ExpenseReportRowContentModel;
-import com.automile.model.ExpenseReportRowCreateModel;
-import com.automile.model.ExpenseReportRowEditModel;
-import com.automile.model.ExpenseReportRowModel;
-import com.automile.model.FuelLevelInputModel;
-import com.automile.model.GeofenceCreate2Model;
-import com.automile.model.GeofenceCreateModel;
-import com.automile.model.GeofenceEditModel;
-import com.automile.model.GeofenceEditModel2;
-import com.automile.model.GeofenceModel;
-import com.automile.model.GeofenceModel2;
-import com.automile.model.GeofenceReportModel;
-import com.automile.model.IMEIConfigCreateModel;
-import com.automile.model.IMEIConfigDetailModel;
-import com.automile.model.IMEIConfigEditModel;
-import com.automile.model.IMEIConfigModel;
-import com.automile.model.IMEIEventDTCModel;
-import com.automile.model.IMEIEventMILModel;
-import com.automile.model.IMEIEventModel;
-import com.automile.model.IMEIEventStatusModel;
-import com.automile.model.MovePushTriggers;
-import com.automile.model.OCRRequest;
-import com.automile.model.OCRResult;
-import com.automile.model.OrganizationEditModel;
-import com.automile.model.OrganizationModel;
-import com.automile.model.OrganizationNodeModel;
-import com.automile.model.PIDModel;
-import com.automile.model.Place2CreateModel;
-import com.automile.model.Place2EditModel;
-import com.automile.model.Place3CreateModel;
-import com.automile.model.Place3EditModel;
-import com.automile.model.PlaceCreateModel;
-import com.automile.model.PlaceEditModel;
-import com.automile.model.PlaceModel;
-import com.automile.model.PlaceModel3;
-import com.automile.model.PublishSubscribeCreateModel;
-import com.automile.model.PublishSubscribeEditModel;
-import com.automile.model.PublishSubscribeModel;
-import com.automile.model.RPMModel;
-import com.automile.model.ResetPasswordUserModel;
-import com.automile.model.TaskCreateModel;
-import com.automile.model.TaskDetailModel;
-import com.automile.model.TaskEditModel;
-import com.automile.model.TaskMessageCreateModel;
-import com.automile.model.TaskMessageEditModel;
-import com.automile.model.TaskMessageModel;
-import com.automile.model.TaskModel;
-import com.automile.model.TransportstyrelsenInfoModel;
-import com.automile.model.TriggerCreateModel;
-import com.automile.model.TriggerCreateModel2;
-import com.automile.model.TriggerDetailModel;
-import com.automile.model.TriggerDetailModel2;
-import com.automile.model.TriggerEditModel;
-import com.automile.model.TriggerEditModel2;
-import com.automile.model.TriggerEditMutedUntilModel;
-import com.automile.model.TriggerMessageHistoryModel;
-import com.automile.model.TriggerModel;
-import com.automile.model.TriggerModel2;
-import com.automile.model.TripAddNoteModel;
-import com.automile.model.TripConcatenation;
-import com.automile.model.TripDetailModel;
-import com.automile.model.TripEditModel;
-import com.automile.model.TripGeoModel;
-import com.automile.model.TripModel;
-import com.automile.model.TripStartEndGeoModel;
-import com.automile.model.TripSummaryReportModel;
-import com.automile.model.TripSynchronized;
-import com.automile.model.UserDeviceCreateModel;
-import com.automile.model.UserDeviceEditModel;
-import com.automile.model.UserDeviceModel;
-import com.automile.model.UserExistingPasswordModel;
-import com.automile.model.UserModel;
-import com.automile.model.Vehicle2CreateModel;
-import com.automile.model.Vehicle2DetailModel;
-import com.automile.model.Vehicle2EditModel;
-import com.automile.model.Vehicle2Model;
-import com.automile.model.VehicleCheckInModel;
-import com.automile.model.VehicleDefectCommentsCreateModel;
-import com.automile.model.VehicleDefectCommentsEditModel;
-import com.automile.model.VehicleDefectCommentsModel;
-import com.automile.model.VehicleDefectTypeModel;
-import com.automile.model.VehicleGeofenceCreateModel;
-import com.automile.model.VehicleGeofenceEditModel;
-import com.automile.model.VehicleGeofenceModel;
-import com.automile.model.VehicleHealth;
-import com.automile.model.VehicleInspectionCreateModel;
-import com.automile.model.VehicleInspectionEditModel;
-import com.automile.model.VehicleInspectionExportModel;
-import com.automile.model.VehicleInspectionModel;
-import com.automile.model.VehiclePlaceCreateModel;
-import com.automile.model.VehiclePlaceEditModel;
-import com.automile.model.VehiclePlaceModel;
-import com.automile.model.VehicleSpeedModel;
-import com.automile.model.VehicleStatusModel;
-import com.automile.model.VehicleSummaryModel;
-import com.automile.model.VehiclesSummaryModel;
+import com.automile.model.*;
 import com.google.common.collect.Lists;
 import com.google.common.net.HttpHeaders;
 import lombok.AccessLevel;
@@ -155,25 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static com.automile.AutomileConfig.CREATE_URL;
-import static com.automile.AutomileConfig.DELETE_URL;
-import static com.automile.AutomileConfig.EDIT_URL;
-import static com.automile.AutomileConfig.GET_BY_ID_URL;
-import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORIES_URL;
-import static com.automile.AutomileConfig.GET_CONTACT2_CUSTOM_CATEGORY_URL;
-import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORIES_URL;
-import static com.automile.AutomileConfig.GET_CONTACT3_CUSTOM_CATEGORY_URL;
-import static com.automile.AutomileConfig.IMEI_EVENTS_URL;
-import static com.automile.AutomileConfig.LIST_URL;
-import static com.automile.AutomileConfig.PUBLISH_SUBSCRIBE_TEST_URL;
-import static com.automile.AutomileConfig.TRIPS_GET_PID_URL;
-import static com.automile.AutomileConfig.TRIPS_GET_URL;
-import static com.automile.AutomileConfig.USER_ACTION_URL;
-import static com.automile.AutomileConfig.USER_URL;
-import static com.automile.AutomileConfig.VEHICLES2_ACTION_URL;
-import static com.automile.AutomileConfig.VEHICLE_HEALTH_GET_OVER_PERIOD_URL;
-import static com.automile.AutomileConfig.getHttpClient;
-import static com.automile.AutomileConfig.getMapper;
+import static com.automile.AutomileConfig.*;
 import static java.lang.String.format;
 
 @Slf4j
@@ -1238,6 +1088,121 @@ public class AutomileClient {
      */
     public void editTaskMessage(int id, TaskMessageEditModel model) {
         automileService.putCall(model, format(EDIT_URL, "resourceowner", "taskmessage", id));
+    }
+
+    /**
+     * Get all asset trackers that the user have access to
+     *
+     * @return
+     */
+    public List<TrackedAssetModelGET> getTrackers() {
+        return getTrackers(null);
+    }
+
+    /**
+     * Get all asset trackers that the user have access to, filter by asset type
+     *
+     * @param filterAssetType
+     * @return
+     */
+    public List<TrackedAssetModelGET> getTrackers(Integer filterAssetType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        automileService.addParam("filterAssetType", filterAssetType, params);
+        return automileService.listCall(TrackedAssetModelGET.class, format(LIST_URL, "resourceowner", "trackedasset"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get an asset tracker by id
+     *
+     * @param id
+     * @return
+     */
+    public TrackedAssetModelGET getTracker(int id) {
+        return automileService.getCall(TrackedAssetModelGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", id));
+    }
+
+    /**
+     * Update an asset tracker
+     *
+     * @param id
+     * @param model
+     */
+    public void editTrackedAsset(Integer id, TrackedAssetModelPUT model) {
+        automileService.putCall(model, format(EDIT_URL, "resourceowner", "trackedasset", id));
+    }
+
+    /**
+     * Put a tracked asset to sleep
+     *
+     * @param id
+     * @param model
+     */
+    public void sleepTrackedAsset(Integer id, TrackedAssetSleepConfigurationModelPUT model) {
+        automileService.putCall(model, format(TRACKED_ASSET_URL, id, "sleep"));
+    }
+
+    /**
+     * Start tracking an asset
+     *
+     * @param id
+     * @param model
+     */
+    public void trackTrackedAsset(Integer id, TrackedAssetTrackConfigurationModelPUT model) {
+        automileService.putCall(model, format(TRACKED_ASSET_URL, id, "track"));
+    }
+
+    /**
+     * Shutdown an asset tracker
+     *
+     * @param id
+     */
+    public void shutdownTrackedAsset(Integer id) {
+        automileService.putCall(format(TRACKED_ASSET_URL, id, "track"));
+    }
+
+    /**
+     * Get a list of asset tracker history
+     *
+     * @param id
+     * @return
+     */
+    public List<TrackedAssetHistoryModelGET> getTrackerHistory(Integer id) {
+        return getTrackerHistory(id, null, null);
+    }
+
+    /**
+     * Get a list of asset tracker history, filter by number of days and history type
+     *
+     * @param id
+     * @param lastNumberOfDays
+     * @param historyType
+     * @return
+     */
+    public List<TrackedAssetHistoryModelGET> getTrackerHistory(Integer id, Integer lastNumberOfDays, Integer historyType) {
+        List<NameValuePair> params = Lists.newArrayList();
+        Optional.ofNullable(lastNumberOfDays).ifPresent(p -> automileService.addParam("lastNumberOfDays", lastNumberOfDays, params));
+        Optional.ofNullable(historyType).ifPresent(p -> automileService.addParam("historyType", historyType, params));
+        return automileService.listCall(TrackedAssetHistoryModelGET.class, format(TRACKED_ASSET_URL, id, "history"),
+                params.toArray(new NameValuePair[params.size()]));
+    }
+
+    /**
+     * Get asset tracker sleep intervals
+     *
+     * @return
+     */
+    public TrackedAssetSleepIntervalGET getTrackerSleepIntervals() {
+        return automileService.getCall(TrackedAssetSleepIntervalGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", "sleepinterval"));
+    }
+
+    /**
+     * Get list of asset tracker enum description
+     *
+     * @return
+     */
+    public List<EnumTypeModelGET> getTrackerEnums() {
+        return automileService.listCall(EnumTypeModelGET.class, format(LIST_URL, "resourceowner", "trackedasset/enum"));
     }
 
     /**
