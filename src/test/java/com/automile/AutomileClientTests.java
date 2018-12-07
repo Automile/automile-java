@@ -184,6 +184,13 @@ public class AutomileClientTests {
         assertEquals(5, enums.size());
     }
 
+    @Test
+    public void testTrackedAssetSleepInterval() throws IOException {
+        mockAuthorized();
+        mockContent("ResourceOwnerTrackedAsset/sleepinterval.json");
+        TrackedAssetSleepIntervalGET sleep = ac.getTrackerSleepIntervals();
+    }
+
     private void mockAuthorized() {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setAccessToken("123");

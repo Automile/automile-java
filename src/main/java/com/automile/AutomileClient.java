@@ -1128,10 +1128,17 @@ public class AutomileClient {
     }
 
 
-
+    /**
+     * Get asset tracker sleep intervals
+     *
+     * @return
+     */
+    public TrackedAssetSleepIntervalGET getTrackerSleepIntervals() {
+        return automileService.getCall(TrackedAssetSleepIntervalGET.class, format(GET_BY_ID_URL, "resourceowner", "trackedasset", "sleepinterval"));
+    }
 
     /**
-     * Get asset tracker enum description
+     * Get list of asset tracker enum description
      *
      * @return
      */
